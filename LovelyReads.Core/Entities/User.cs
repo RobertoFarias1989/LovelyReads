@@ -13,6 +13,7 @@ public class User : BaseEntity
         Password = password;
 
         UpdatedAt = null;
+        BookReviews = new List<BookReview>();
     }
 
     public Address Address { get; private set; }
@@ -20,4 +21,5 @@ public class User : BaseEntity
     public Email  Email { get; private set; }
     public Name  Name { get; private set; }
     public Password  Password { get; private set; }
+    public List<BookReview> BookReviews { get; private set; }
 }

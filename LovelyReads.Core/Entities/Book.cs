@@ -8,8 +8,8 @@ public class Book : BaseEntity
         int idAuthor,
         string publisher,
         int idGenre,
-        int publishedYear,
-        int pageAmount, decimal averageRating, byte bookCover)
+        short publishedYear,
+        short pageAmount, decimal averageRating, byte bookCover)
     {
         Title = title;
         Description = description;
@@ -34,8 +34,8 @@ public class Book : BaseEntity
     public string Publisher { get; private set; }
     public int IdGenre { get; private set; }
     public Genre  Genre { get; private set; }
-    public int PublishedYear { get; private set; }
-    public int PageAmount { get; private set; }
+    public short PublishedYear { get; private set; }
+    public short PageAmount { get; private set; }
     public decimal AverageRating { get; private set; }
     public byte BookCover { get; private set; }
     public List<BookReview>  reviews { get; private set; }
