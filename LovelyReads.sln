@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovelyReads.Core", "LovelyReads.Core\LovelyReads.Core.csproj", "{D3421096-A724-45C6-A11A-AA3B4F414C14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovelyReads.Core", "LovelyReads.Core\LovelyReads.Core.csproj", "{D3421096-A724-45C6-A11A-AA3B4F414C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovelyReads.Infrastructure", "LovelyReads.Infrastructure\LovelyReads.Infrastructure.csproj", "{7A0E3B69-0015-41E8-8C16-052B8C1F6690}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D3421096-A724-45C6-A11A-AA3B4F414C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3421096-A724-45C6-A11A-AA3B4F414C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3421096-A724-45C6-A11A-AA3B4F414C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A0E3B69-0015-41E8-8C16-052B8C1F6690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A0E3B69-0015-41E8-8C16-052B8C1F6690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A0E3B69-0015-41E8-8C16-052B8C1F6690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A0E3B69-0015-41E8-8C16-052B8C1F6690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
