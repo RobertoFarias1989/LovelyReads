@@ -2,7 +2,7 @@
 
 public class BookReview : BaseEntity
 {
-    public BookReview(int rating, string comment, int idUser, int idBook)
+    public BookReview(byte rating, string comment, int idUser, int idBook)
     {
         Rating = rating;
         Comment = comment;
@@ -12,7 +12,7 @@ public class BookReview : BaseEntity
         UpdatedAt = null;
     }
 
-    public int Rating { get; private set; }
+    public byte Rating { get; private set; }
     public string Comment { get; private set; }
     public int IdUser { get; private set; }
     public User User { get; private set; }
