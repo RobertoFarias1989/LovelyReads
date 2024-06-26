@@ -8,15 +8,13 @@
 
   <ItemGroup>
     <Folder Include="Author\Commands\" />
-    <Folder Include="Author\ViewModels\" />
+    <Folder Include="Author\Queries\GetAuthorById\" />
     <Folder Include="Author\Validators\" />
-    <Folder Include="Author\Queries\" />
     <Folder Include="BookReview\Commands\" />
     <Folder Include="BookReview\ViewModels\" />
     <Folder Include="BookReview\Validators\" />
     <Folder Include="BookReview\Queries\" />
     <Folder Include="Book\Commands\" />
-    <Folder Include="Book\ViewModels\" />
     <Folder Include="Book\Validators\" />
     <Folder Include="Book\Queries\" />
     <Folder Include="Genre\Commands\" />

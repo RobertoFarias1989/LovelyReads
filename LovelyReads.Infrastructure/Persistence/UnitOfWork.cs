@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace LovelyReads.Infrastructure.Persistence;
 
-public class UnitOfWork : IUnitOfWorkRepository
+public class UnitOfWork : IUnitOfWork
 {
     private readonly LovelyReadsDbContext _dbContext;
     private IDbContextTransaction _transaction;
