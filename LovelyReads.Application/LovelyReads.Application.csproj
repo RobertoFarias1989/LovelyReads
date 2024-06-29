@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Author\Commands\" />
-    <Folder Include="Author\Queries\GetAuthorById\" />
+    <Folder Include="Author\Commands\CreateAuthor\" />
+    <Folder Include="Author\Commands\DeleteAuthor\" />
+    <Folder Include="Author\Commands\UpdateAuthor\" />
     <Folder Include="Author\Validators\" />
     <Folder Include="BookReview\Commands\" />
     <Folder Include="BookReview\ViewModels\" />

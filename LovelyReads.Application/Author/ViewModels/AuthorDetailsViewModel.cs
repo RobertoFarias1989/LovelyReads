@@ -4,8 +4,9 @@ namespace LovelyReads.Application.Author.ViewModels;
 
 public class AuthorDetailsViewModel
 {
-    public AuthorDetailsViewModel(string born, string? died, string description, string fullName, byte image, List<BookViewModel> books)
+    public AuthorDetailsViewModel(int id, string born, string? died, string description, string fullName, byte image, List<BookViewModel> books)
     {
+        Id = id;
         Born = born;
         Died = died;
         Description = description;
@@ -14,6 +15,7 @@ public class AuthorDetailsViewModel
         Books = books;
     }
 
+    public int Id { get; private set; }
     public string Born { get; private set; }
     public string? Died { get; private set; }
     public string Description { get; private set; }
