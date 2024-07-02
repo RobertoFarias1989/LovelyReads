@@ -7,21 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Author\Commands\CreateAuthor\" />
-    <Folder Include="Author\Commands\DeleteAuthor\" />
-    <Folder Include="Author\Commands\UpdateAuthor\" />
-    <Folder Include="Author\Validators\" />
     <Folder Include="BookReview\Commands\" />
-    <Folder Include="BookReview\ViewModels\" />
     <Folder Include="BookReview\Validators\" />
     <Folder Include="BookReview\Queries\" />
-    <Folder Include="Book\Commands\" />
+    <Folder Include="Book\Commands\CreateBook\" />
+    <Folder Include="Book\Commands\DeleteBook\" />
+    <Folder Include="Book\Commands\UpdateBook\" />
+    <Folder Include="Book\Queries\GetAllBooks\" />
+    <Folder Include="Book\Queries\GetBookById\" />
     <Folder Include="Book\Validators\" />
-    <Folder Include="Book\Queries\" />
-    <Folder Include="Genre\Commands\" />
-    <Folder Include="Genre\ViewModels\" />
-    <Folder Include="Genre\Validators\" />
-    <Folder Include="Genre\Queries\" />
     <Folder Include="User\Commands\" />
     <Folder Include="User\ViewModels\" />
     <Folder Include="User\Validators\" />

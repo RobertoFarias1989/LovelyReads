@@ -21,7 +21,7 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User?> GetByIdAsync(int id)
         {
             return await _dbContext
                 .Users
@@ -29,7 +29,7 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories
                 .SingleOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<User> GetDetailsByIdAsync(int id)
+        public async Task<User?> GetDetailsByIdAsync(int id)
         {
             return await _dbContext
                 .Users
@@ -43,8 +43,10 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories
             await _dbContext.Users.AddAsync(user);
         }
 
-        public async Task UpdateAsync(User user)
+      
+        public void UpdateAsync(User user)
         {
+            //_dbContext.Entry(user).State = EntityState.Modified;
             _dbContext.Users.Update(user);
         }
     }

@@ -14,6 +14,7 @@ public class User : BaseEntity
 
         UpdatedAt = null;
         BookReviews = new List<BookReview>();
+        IsActive = true;
     }
 
     public Address Address { get; private set; }

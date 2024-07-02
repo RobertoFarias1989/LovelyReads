@@ -1,11 +1,13 @@
 ﻿namespace LovelyReads.Core.ValueObjects;
 
-public record Email
-{
-    public Email(string emailAddress)
-    {
-        EmailAddress = emailAddress;
-    }
+public record Email(string EmailAddress);
 
-    public string EmailAddress { get; init; }
-}
+//public record Email
+//{
+//    public Email(string emailAddress)
+//    {
+//        EmailAddress = emailAddress;
+//    }
+
+//    public string EmailAddress { get; init; }
+//}

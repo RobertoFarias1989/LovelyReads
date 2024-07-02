@@ -10,6 +10,7 @@ public class BookReview : BaseEntity
         IdBook = idBook;
 
         UpdatedAt = null;
+        IsActive = true;
     }
 
     public byte Rating { get; private set; }
