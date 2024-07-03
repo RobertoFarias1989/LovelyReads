@@ -41,4 +41,25 @@ public class Book : BaseEntity
     public byte BookCover { get; private set; }
     public List<BookReview>  reviews { get; private set; }
 
+    public void Update(string title,
+        string description,
+        string iSBN,
+        int idAuthor,
+        string publisher,
+        int idGenre,
+        short publishedYear,
+        short pageAmount, decimal averageRating, byte bookCover)
+    {
+        Title = title;
+        Description = description;
+        ISBN = iSBN;
+        IdAuthor = idAuthor;
+        Publisher = publisher;
+        IdGenre = idGenre;
+        PublishedYear = publishedYear;
+        PageAmount = pageAmount;
+        AverageRating = averageRating;
+        BookCover = bookCover;
+    }
+
 }

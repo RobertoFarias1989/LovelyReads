@@ -10,11 +10,6 @@
     <Folder Include="BookReview\Commands\" />
     <Folder Include="BookReview\Validators\" />
     <Folder Include="BookReview\Queries\" />
-    <Folder Include="Book\Commands\CreateBook\" />
-    <Folder Include="Book\Commands\DeleteBook\" />
-    <Folder Include="Book\Commands\UpdateBook\" />
-    <Folder Include="Book\Queries\GetAllBooks\" />
-    <Folder Include="Book\Queries\GetBookById\" />
     <Folder Include="Book\Validators\" />
     <Folder Include="User\Commands\" />
     <Folder Include="User\ViewModels\" />
