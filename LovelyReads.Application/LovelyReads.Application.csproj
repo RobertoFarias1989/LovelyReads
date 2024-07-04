@@ -10,11 +10,12 @@
     <Folder Include="BookReview\Commands\" />
     <Folder Include="BookReview\Validators\" />
     <Folder Include="BookReview\Queries\" />
-    <Folder Include="Book\Validators\" />
-    <Folder Include="User\Commands\" />
+    <Folder Include="User\Commands\DeleteUser\" />
+    <Folder Include="User\Commands\UpdateUser\" />
+    <Folder Include="User\Queries\GetAllUsers\" />
+    <Folder Include="User\Queries\GetUserById\" />
     <Folder Include="User\ViewModels\" />
     <Folder Include="User\Validators\" />
-    <Folder Include="User\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

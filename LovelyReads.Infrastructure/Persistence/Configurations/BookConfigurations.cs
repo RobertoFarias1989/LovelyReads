@@ -23,6 +23,10 @@ public class BookConfigurations : BaseEntityConfigurations<Book>
             .HasMaxLength(100);
 
         builder
+            .Property(b => b.ISBN)
+            .HasMaxLength(13);
+
+        builder
             .HasMany(b => b.reviews)
             .WithOne(br => br.Book)
             .HasForeignKey(br => br.IdBook)
