@@ -18,26 +18,33 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Aut
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
-        if(author == null) return null;
+        object authorDetailsViewModel;
 
-        var books = author.Books
-            .Where(b => b.IdAuthor == author.Id)
-            .Select(b => new BookViewModel(
-                b.Id,
-                b.Title,
-                b.PublishedYear,
-                b.AverageRating,
-                b.BookCover)).ToList();
+        if (author != null)
+        {
+            var books = author.Books
+                .Where(b => b.IdAuthor == author.Id)
+                .Select(b => new BookViewModel(
+                    b.Id,
+                    b.Title,
+                    b.PublishedYear,
+                    b.AverageRating,
+                    b.BookCover)).ToList();
 
-        var authorDetailsViewModel = new AuthorDetailsViewModel(
-            author.Id,
-            author.Born,
-            author.Died,
-            author.Description,
-            author.Name.FullName,
-            author.Image,
-            books);
+             authorDetailsViewModel = new AuthorDetailsViewModel(
+                author.Id,
+                author.Born,
+                author.Died,
+                author.Description,
+                author.Name.FullName,
+                author.Image,
+                books);
+        }
+        else
+        {
+            throw new Exception($"The author with id:{request.Id} was not found.");
+        }
 
-        return authorDetailsViewModel;
+        return (AuthorDetailsViewModel)authorDetailsViewModel;
     }
 }

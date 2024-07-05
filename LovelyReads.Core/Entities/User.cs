@@ -23,4 +23,14 @@ public class User : BaseEntity
     public Name  Name { get; private set; }
     public Password  Password { get; private set; }
     public List<BookReview> BookReviews { get; private set; }
+
+
+    public void Update(Address address, CPF cPF, Email email, Name name, Password password)
+    {
+        Address = address;
+        CPF = cPF;
+        Email = email;
+        Name = name;
+        Password = password;
+    }
 }

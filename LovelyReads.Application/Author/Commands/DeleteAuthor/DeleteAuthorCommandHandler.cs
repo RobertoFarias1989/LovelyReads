@@ -16,7 +16,7 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, U
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
-        if (author is not null)
+        if (author != null && author.IsActive == true)
         {
             author.Inactived();
 
@@ -27,7 +27,7 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, U
         }
         else
         {
-            throw new Exception("The author is already inactived.");
+            throw new Exception("The author was not found or it's already inatived.");
         }
 
         return Unit.Value;
