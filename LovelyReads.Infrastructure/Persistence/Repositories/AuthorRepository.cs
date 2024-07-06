@@ -21,7 +21,7 @@ public class AuthorRepository : IAuthorRepository
             .ToListAsync();
     }
 
-    public async Task<Author> GetByIdAsync(int id)
+    public async Task<Author?> GetByIdAsync(int id)
     {
         return await _dbContext
             .Authors
@@ -29,7 +29,7 @@ public class AuthorRepository : IAuthorRepository
             .SingleOrDefaultAsync(a => a.Id == id);
     }
 
-    public async Task<Author> GetDetailsByIdAsync(int id)
+    public async Task<Author?> GetDetailsByIdAsync(int id)
     {
         return await _dbContext
             .Authors
@@ -43,7 +43,7 @@ public class AuthorRepository : IAuthorRepository
         await _dbContext.Authors.AddAsync(author);
     }
 
-    public async Task UpdateAsync(Author author)
+    public void UpdateAsync(Author author)
     {
          _dbContext.Authors.Update(author);
     }

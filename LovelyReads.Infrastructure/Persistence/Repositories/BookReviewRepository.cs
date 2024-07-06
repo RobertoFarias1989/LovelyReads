@@ -21,7 +21,7 @@ public class BookReviewRepository : IBookReviewRepository
             .ToListAsync();
     }
 
-    public async Task<BookReview> GetByIdAsync(int id)
+    public async Task<BookReview?> GetByIdAsync(int id)
     {
         return await _dbContext
             .BookReviews
@@ -29,7 +29,7 @@ public class BookReviewRepository : IBookReviewRepository
             .SingleOrDefaultAsync(br => br.Id == id);
     }
 
-    public async Task<BookReview> GetDetailsByIdAsync(int id)
+    public async Task<BookReview?> GetDetailsByIdAsync(int id)
     {
         return await _dbContext
             .BookReviews
@@ -45,7 +45,7 @@ public class BookReviewRepository : IBookReviewRepository
         await _dbContext.BookReviews.AddAsync(bookReview);
     }
 
-    public async Task UpdateAsync(BookReview bookReview)
+    public void UpdateAsync(BookReview bookReview)
     {
         _dbContext.BookReviews.Update(bookReview);
     }

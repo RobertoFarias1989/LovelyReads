@@ -21,7 +21,7 @@ public class BookRepository : IBookRepository
             .ToListAsync();
     }
 
-    public async Task<Book> GetByIdAsync(int id)
+    public async Task<Book?> GetByIdAsync(int id)
     {
         return await _dbContext
             .Books
@@ -29,7 +29,7 @@ public class BookRepository : IBookRepository
             .SingleOrDefaultAsync(b => b.Id == id);
     }
 
-    public async Task<Book> GetDetailsByIdAsync(int id)
+    public async Task<Book?> GetDetailsByIdAsync(int id)
     {
         return await _dbContext
             .Books
@@ -43,7 +43,7 @@ public class BookRepository : IBookRepository
         await _dbContext.Books.AddAsync(book);
     }
 
-    public async Task UpdateAsync(Book book)
+    public void UpdateAsync(Book book)
     {
          _dbContext.Books.Update(book);
     }
