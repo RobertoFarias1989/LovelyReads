@@ -6,7 +6,7 @@ namespace LovelyReads.Infrastructure.Persistence;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly LovelyReadsDbContext _dbContext;
-    private IDbContextTransaction _transaction;
+    private IDbContextTransaction? _transaction;
 
     public UnitOfWork(LovelyReadsDbContext dbContext, 
         IUserRepository userRepository, 
@@ -42,11 +42,11 @@ public class UnitOfWork : IUnitOfWork
     {
         try
         {
-            await _transaction.CommitAsync();
+            await _transaction!.CommitAsync();
         }
         catch (Exception ex)
         {
-            await _transaction.RollbackAsync();
+            await _transaction!.RollbackAsync();
 
             throw ex;
         }
