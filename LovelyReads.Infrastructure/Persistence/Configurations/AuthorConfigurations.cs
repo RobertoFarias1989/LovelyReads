@@ -19,6 +19,10 @@ public class AuthorConfigurations : BaseEntityConfigurations<Author>
             .HasMaxLength(254);
 
         builder
+            .Property(a => a.Description)
+            .HasMaxLength(254);
+
+        builder
             .HasMany(a => a.Books)
             .WithOne(b => b.Author)
             .HasForeignKey(b => b.IdAuthor)

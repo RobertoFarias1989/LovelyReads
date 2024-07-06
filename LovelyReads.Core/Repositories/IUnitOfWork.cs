@@ -1,6 +1,6 @@
 ﻿namespace LovelyReads.Core.Repositories;
 
-public interface IUnitOfWorkRepository
+public interface IUnitOfWork
 {
     public IUserRepository UserRepository { get; }
     public IBookRepository BookRepository { get; }

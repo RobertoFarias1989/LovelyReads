@@ -24,6 +24,7 @@ public class Book : BaseEntity
 
         reviews = new List<BookReview>();
         UpdatedAt = null;
+        IsActive = true;
     }
 
     public string Title { get; private set; }
@@ -39,5 +40,26 @@ public class Book : BaseEntity
     public decimal AverageRating { get; private set; }
     public byte BookCover { get; private set; }
     public List<BookReview>  reviews { get; private set; }
+
+    public void Update(string title,
+        string description,
+        string iSBN,
+        int idAuthor,
+        string publisher,
+        int idGenre,
+        short publishedYear,
+        short pageAmount, decimal averageRating, byte bookCover)
+    {
+        Title = title;
+        Description = description;
+        ISBN = iSBN;
+        IdAuthor = idAuthor;
+        Publisher = publisher;
+        IdGenre = idGenre;
+        PublishedYear = publishedYear;
+        PageAmount = pageAmount;
+        AverageRating = averageRating;
+        BookCover = bookCover;
+    }
 
 }
