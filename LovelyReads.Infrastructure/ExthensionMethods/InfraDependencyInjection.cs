@@ -12,7 +12,8 @@ namespace LovelyReads.Infrastructure.ExthensionMethods
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) 
         {
             services.AddRepositories()
-                .AddUnitOfWork();
+                .AddUnitOfWork()
+                .AddDbContext(configuration);
 
             return services;
             

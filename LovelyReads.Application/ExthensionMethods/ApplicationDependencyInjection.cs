@@ -29,8 +29,8 @@ namespace LovelyReads.Application.ExthensionMethods
         public static IServiceCollection AddValidator(this IServiceCollection services) 
         {
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //services.AddFluentValidationAutoValidation();
-            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateAuthorCommandValidator>());
+            services.AddFluentValidationAutoValidation();
+            //services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateAuthorCommandValidator>());
 
             return services;
 

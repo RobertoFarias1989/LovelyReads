@@ -2,6 +2,10 @@
 
 public class BookReview : BaseEntity
 {
+    public BookReview()
+    {
+        
+    }
     public BookReview(byte rating, string comment, int idUser, int idBook)
     {
         Rating = rating;
