@@ -4,6 +4,10 @@ namespace LovelyReads.Core.Entities;
 
 public class Author : BaseEntity
 {
+    public Author()
+    {
+            
+    }
     public Author(string born, string died, string description ,Name name ,byte image)
     {
         Born = born;

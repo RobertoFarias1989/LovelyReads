@@ -27,6 +27,10 @@ public class BookConfigurations : BaseEntityConfigurations<Book>
             .HasMaxLength(13);
 
         builder
+            .Property (b => b.AverageRating)
+            .HasPrecision(10,2);
+
+        builder
             .HasMany(b => b.reviews)
             .WithOne(br => br.Book)
             .HasForeignKey(br => br.IdBook)

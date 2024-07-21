@@ -2,6 +2,10 @@
 
 public class Genre : BaseEntity
 {
+    public Genre()
+    {
+        
+    }
     public Genre(string description)
     {
         Description = description;

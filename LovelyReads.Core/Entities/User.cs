@@ -4,6 +4,10 @@ namespace LovelyReads.Core.Entities;
 
 public class User : BaseEntity
 {
+    public User()
+    {
+        
+    }
     public User(Address address, CPF cPF, Email email, Name name, Password password)
     {
         Address = address;
