@@ -19,4 +19,8 @@
     <ProjectReference Include="..\LovelyReads.Application\LovelyReads.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Storage\" />
+  </ItemGroup>
+
 </Project>

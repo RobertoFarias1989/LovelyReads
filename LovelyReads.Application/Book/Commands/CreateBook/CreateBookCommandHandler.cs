@@ -15,16 +15,20 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
 
         public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            var book = new Core.Entities.Book(request.Title,
-                request.Description,
-                request.ISBN,
+            var bookCoverPath = Path.Combine("Storage", request.BookCover!.FileName);
+            using Stream fileStream = new FileStream(bookCoverPath, FileMode.Create);
+            request.BookCover.CopyTo(fileStream);
+
+            var book = new Core.Entities.Book(request.Title!,
+                request.Description!,
+                request.ISBN!,
                 request.IdAuthor,
-                request.Publisher,
+                request.Publisher!,
                 request.IdGenre,
                 request.PublishedYear,
                 request.PageAmount,
                 request.AverageRating,
-                request.BookCover);
+                bookCoverPath);
 
             await _unitOfWork.BookRepository.AddAsync(book);
 
