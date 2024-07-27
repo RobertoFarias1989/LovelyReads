@@ -18,17 +18,31 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
 
         if(book != null && book.IsActive == true)
         {
+            if (request.BookCover != null)
+            {
+                var olderCoverPath = book.BookCover;
+                var bookCoverPath = Path.Combine("Storage", request.BookCover!.FileName);
+
+                if (!string.IsNullOrEmpty(olderCoverPath) && File.Exists(olderCoverPath))  
+                {
+                    File.Delete(olderCoverPath);
+                }
+
+                using Stream fileStream = new FileStream(bookCoverPath, FileMode.Create);
+                request.BookCover.CopyTo(fileStream);
+                book.UpdateBookCover(bookCoverPath);
+            }
+
             book.Update(
-                request.Title,
-                request.Description,
-                request.ISBN,
+                request.Title!,
+                request.Description!,
+                request.ISBN!,
                 request.IdAuthor,
-                request.Publisher,
+                request.Publisher!,
                 request.IdGenre,
                 request.PublishedYear,
                 request.PageAmount,
-                request.AverageRating,
-                request.BookCover);
+                request.AverageRating);
 
             _unitOfWork.BookRepository.UpdateAsync(book);
 

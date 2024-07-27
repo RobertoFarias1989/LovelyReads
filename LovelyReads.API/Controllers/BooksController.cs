@@ -46,7 +46,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateBookCommand command)
+        public async Task<IActionResult> Post([FromForm] CreateBookCommand command)
         {
             var id = await _mediator.Send(command);
 
@@ -54,7 +54,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, UpdateBookCommand command)
+        public async Task<IActionResult> Put(int id, [FromForm] UpdateBookCommand command)
         {
             await _mediator.Send(command);
 
