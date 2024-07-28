@@ -44,11 +44,11 @@ public class UnitOfWork : IUnitOfWork
         {
             await _transaction!.CommitAsync();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             await _transaction!.RollbackAsync();
 
-            throw ex;
+            throw;
         }
     }
 

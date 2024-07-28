@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>ef6bc88f-d8c3-4df8-b582-b690104f1797</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Storage\" />
+    <Folder Include="BookStorage\" />
+    <Folder Include="AuthorStorage\" />
   </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@ public class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, Uni
 
         if (genre is not null)
         {
-            genre.Update(request.Description);
+            genre.Update(request.Description!);
 
              _unitOfWork.GenreRepository.UpdateAsync(genre);
 

@@ -8,6 +8,8 @@ public class UpdateBookCommand : IRequest<Unit>
     public int Id { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
+    public int EditionNumber { get; set; }
+    public string? EditionDescription { get; set; }
     public string? ISBN { get; set; }
     public int IdAuthor { get; set; }
     public string? Publisher { get; set; }

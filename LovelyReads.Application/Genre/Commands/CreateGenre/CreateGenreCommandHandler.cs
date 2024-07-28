@@ -15,7 +15,7 @@ public class CreateGenreCommandHandler : IRequestHandler<CreateGenreCommand, int
 
     public async Task<int> Handle(CreateGenreCommand request, CancellationToken cancellationToken)
     {
-        var genre = new Core.Entities.Genre(request.Description);
+        var genre = new Core.Entities.Genre(request.Description!);
 
         await _unitOfWork.GenreRepository.AddAsync(genre);
 

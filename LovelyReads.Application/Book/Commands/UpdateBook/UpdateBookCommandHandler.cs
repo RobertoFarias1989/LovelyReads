@@ -1,4 +1,5 @@
 ﻿using LovelyReads.Core.Repositories;
+using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.Book.Commands.UpdateBook;
@@ -21,7 +22,7 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
             if (request.BookCover != null)
             {
                 var olderCoverPath = book.BookCover;
-                var bookCoverPath = Path.Combine("Storage", request.BookCover!.FileName);
+                var bookCoverPath = Path.Combine("BookStorage", request.BookCover!.FileName);
 
                 if (!string.IsNullOrEmpty(olderCoverPath) && File.Exists(olderCoverPath))  
                 {
@@ -36,6 +37,7 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
             book.Update(
                 request.Title!,
                 request.Description!,
+                new Edition(request.EditionNumber, request.EditionDescription!),
                 request.ISBN!,
                 request.IdAuthor,
                 request.Publisher!,
