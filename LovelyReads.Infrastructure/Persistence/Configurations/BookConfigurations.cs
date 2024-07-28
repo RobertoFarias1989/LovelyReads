@@ -23,10 +23,6 @@ public class BookConfigurations : BaseEntityConfigurations<Book>
             .HasMaxLength(100);
 
         builder
-            .Property(b => b.Edition)
-            .HasMaxLength(100);
-
-        builder
             .Property(b => b.ISBN)
             .HasMaxLength(13);
 
