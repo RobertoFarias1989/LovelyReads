@@ -9,59 +9,59 @@ namespace LovelyReads.Application.Book.Validators
         {
             RuleFor(b => b.Title)
                 .NotEmpty()
-                .WithMessage("Title is required.")
+                .WithMessage("Title's field musn't be empty.")
                 .NotNull()
-                .WithMessage("Title is required.")
+                .WithMessage("Title's field musn't be null.")
                 .MaximumLength(150)
                 .WithMessage("Title's maximum length is around 150 characters.");
 
             RuleFor(b => b.Description)
                 .NotEmpty()
-                .WithMessage("Description is required.")
+                .WithMessage("Description's field musn't be empty.")
                 .NotNull()
-                .WithMessage("Description is required.")
+                .WithMessage("Description's field musn't be null.")
                 .MaximumLength(254)
                 .WithMessage("Description's maximum length is around 254 characters.");
 
             RuleFor(b => b.Publisher)
                 .NotEmpty()
-                .WithMessage("Publisher is required.")
+                .WithMessage("Publisher's field musn't be empty.")
                 .NotNull()
-                .WithMessage("Publisher is required.")
+                .WithMessage("Publisher's field musn't be null.")
                 .MaximumLength(100)
                 .WithMessage("Publisher's maximum length is around 100 characters.");
 
             RuleFor(b => b.PublishedYear)
                .NotEmpty()
-               .WithMessage("PublishedYear is required.")
+               .WithMessage("PublishedYear's field musn't be empty.")
                .NotNull()
-               .WithMessage("PublishedYear is required.");
+               .WithMessage("PublishedYear's field musn't be null.");
                        
             RuleFor(b => b.PageAmount)
                .NotEmpty()
-               .WithMessage("PageAmount is required.")
+               .WithMessage("PageAmount's field musn't be empty.")
                .NotNull()
-               .WithMessage("PageAmount is required.");
+               .WithMessage("PageAmount's field musn't be null.");
 
-            RuleFor(b => b.BookCover)
-               .NotEmpty()
-               .WithMessage("BookCover is required.")
-               .NotNull()
-               .WithMessage("BookCover is required.");
+            //RuleFor(b => b.BookCover)
+            //   .NotEmpty()
+            //   .WithMessage("BookCover's field musn't be empty.")
+            //   .NotNull()
+            //   .WithMessage("BookCover's field musn't be null.");
 
             RuleFor(b => b.EditionDescription)
                .NotEmpty()
-               .WithMessage("EditionDescription is required.")
+               .WithMessage("EditionDescription's field musn't be empty.")
                .NotNull()
-               .WithMessage("EditionDescription is required.")
+               .WithMessage("EditionDescription's field musn't be null.")
                .MaximumLength(100)
                .WithMessage("EditionDescription's maximum length is around 100 characters.");
 
             RuleFor(b => b.ISBN)
                 .NotEmpty()
-                .WithMessage("ISBN is required.")
+                .WithMessage("ISBN's field musn't be empty.")
                 .NotNull()
-                .WithMessage("ISBN is required.")
+                .WithMessage("ISBN's field musn't be null.")
                 .MaximumLength(13)
                 .WithMessage("ISBN's maximum length is around 13 characters.");
 

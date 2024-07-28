@@ -9,17 +9,17 @@ namespace LovelyReads.Application.User.Validators
         {
             RuleFor(u => u.FullName)
             .NotEmpty()
-                .WithMessage("FullName is required.")
+                .WithMessage("FullName's field musn't be empty.")
             .NotNull()
-                .WithMessage("FullName is required.")
+                .WithMessage("FullName's field musn't be null.")
             .MaximumLength(150)
                 .WithMessage("FullName's maximum length is around 150 characters.");
 
             RuleFor(u => u.CPFNumber)
            .NotEmpty()
-               .WithMessage("CPFNumber is required.")
+               .WithMessage("CPFNumber's field musn't be empty.")
            .NotNull()
-               .WithMessage("CPFNumber is required.")
+               .WithMessage("\"CPFNumber's field musn't be null.")
            .MaximumLength(11)
                .WithMessage("CPFNumber's maximum length is around 11 characters.")
             .Must(IsCPFValidate)
@@ -27,9 +27,9 @@ namespace LovelyReads.Application.User.Validators
 
             RuleFor(u => u.EmailAddress)
             .NotEmpty()
-               .WithMessage("EmailAddress is required.")
+               .WithMessage("EmailAddress's field musn't be empty.")
            .NotNull()
-               .WithMessage("EmailAddress is required.")
+               .WithMessage("EmailAddress's field musn't be null.")
            .EmailAddress()
                .WithMessage("A valid email address is required.")
            .MaximumLength(100)
@@ -37,41 +37,41 @@ namespace LovelyReads.Application.User.Validators
 
             RuleFor(u => u.Street)
             .NotEmpty()
-               .WithMessage("Street is required.")
+               .WithMessage("Street's field musn't be empty.")
            .NotNull()
-               .WithMessage("Street is required.")
+               .WithMessage("Street's field musn't be null.")
            .MaximumLength(100)
                .WithMessage("Street's maximum length is around 100 characters.");
 
             RuleFor(u => u.City)
                .NotEmpty()
-                  .WithMessage("City is required.")
+                  .WithMessage("City's field musn't be empty.")
               .NotNull()
-                  .WithMessage("City is required.")
+                  .WithMessage("City's field musn't be null.")
               .MaximumLength(100)
                   .WithMessage("City's maximum length is around 100 characters.");
 
             RuleFor(u => u.State)
                .NotEmpty()
-                  .WithMessage("State is required.")
+                  .WithMessage("State's field musn't be empty.")
                .NotNull()
-                  .WithMessage("State is required.")
+                  .WithMessage("State's field musn't be null.")
                .MaximumLength(100)
                   .WithMessage("State's maximum length is around 100 characters.");
 
             RuleFor(u => u.PostalCode)
                 .NotEmpty()
-                   .WithMessage("PostalCode is required.")
+                   .WithMessage("PostalCode's field musn't be empty.")
                 .NotNull()
-                   .WithMessage("PostalCode is required.")
+                   .WithMessage("PostalCode's field musn't be null.")
                 .MaximumLength(100)
                    .WithMessage("PostalCode's maximum length is around 100 characters.");
 
             RuleFor(u => u.Country)
                 .NotEmpty()
-                   .WithMessage("Country is required.")
+                   .WithMessage("Country's field musn't be empty.")
                 .NotNull()
-                   .WithMessage("Country is required.")
+                   .WithMessage("Country's field musn't be null.")
                 .MaximumLength(50)
                    .WithMessage("Country's maximum length is around 50 characters.");
 

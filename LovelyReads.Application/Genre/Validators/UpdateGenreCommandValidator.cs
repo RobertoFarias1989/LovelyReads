@@ -8,11 +8,12 @@ namespace LovelyReads.Application.Genre.Validators
         public UpdateGenreCommandValidator()
         {
             RuleFor(g => g.Description)
-            .NotEmpty()
-            .WithMessage("Genre is required.")
-            .NotNull()
-            .WithMessage("Genre is required.")
-            .MaximumLength(150);
+             .NotEmpty()
+             .WithMessage("Description's field musn't be empty.")
+             .NotNull()
+             .WithMessage("Description's field musn't be null.")
+             .MaximumLength(150)
+             .WithMessage("Description' s maximun lenght is around 150.");
         }
     }
 }

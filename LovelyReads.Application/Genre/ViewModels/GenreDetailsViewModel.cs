@@ -4,7 +4,12 @@ namespace LovelyReads.Application.Genre.ViewModels;
 
 public class GenreDetailsViewModel
 {
-    public GenreDetailsViewModel(int id, string description, bool isActive, DateTime createdAt, DateTime? updatedAt, List<BookViewModel> bookViewModels)
+    public GenreDetailsViewModel(int id,
+        string description,
+        bool isActive,
+        DateTime createdAt,
+        DateTime? updatedAt,
+        List<BookViewModel> bookViewModels)
     {
         Id = id;
         Description = description;
