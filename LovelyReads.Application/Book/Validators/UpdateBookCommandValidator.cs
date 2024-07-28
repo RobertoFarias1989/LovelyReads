@@ -43,11 +43,19 @@ public class UpdateBookCommandValidator : AbstractValidator<UpdateBookCommand>
            .NotNull()
            .WithMessage("PageAmount is required.");
 
-        RuleFor(b => b.BookCover)
-           .NotEmpty()
-           .WithMessage("BookCover is required.")
-           .NotNull()
-           .WithMessage("BookCover is required.");
+        //RuleFor(b => b.BookCover)
+        //   .NotEmpty()
+        //   .WithMessage("BookCover is required.")
+        //   .NotNull()
+        //   .WithMessage("BookCover is required.");
+
+        RuleFor(b => b.EditionDescription)
+               .NotEmpty()
+               .WithMessage("EditionDescription is required.")
+               .NotNull()
+               .WithMessage("EditionDescription is required.")
+               .MaximumLength(100)
+               .WithMessage("EditionDescription's maximum length is around 100 characters.");
 
         RuleFor(b => b.ISBN)
             .NotEmpty()

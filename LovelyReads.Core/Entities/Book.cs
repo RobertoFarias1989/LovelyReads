@@ -1,4 +1,6 @@
-﻿namespace LovelyReads.Core.Entities;
+﻿using LovelyReads.Core.ValueObjects;
+
+namespace LovelyReads.Core.Entities;
 
 public class Book : BaseEntity
 {
@@ -8,6 +10,7 @@ public class Book : BaseEntity
     }
     public Book(string title,
         string description,
+        Edition edition,
         string iSBN,
         int idAuthor,
         string publisher,
@@ -17,6 +20,7 @@ public class Book : BaseEntity
     {
         Title = title;
         Description = description;
+        Edition = edition;
         ISBN = iSBN;
         IdAuthor = idAuthor;
         Publisher = publisher;
@@ -33,6 +37,7 @@ public class Book : BaseEntity
 
     public string Title { get; private set; }
     public string Description { get; private set; }
+    public Edition Edition { get; private set; }
     public string ISBN { get; private set; }
     public int IdAuthor { get; private set; }
     public Author? Author { get; private set; }
@@ -48,6 +53,7 @@ public class Book : BaseEntity
    
     public void Update(string title,
         string description,
+        Edition edition,
         string iSBN,
         int idAuthor,
         string publisher,
@@ -57,6 +63,7 @@ public class Book : BaseEntity
     {
         Title = title;
         Description = description;
+        Edition = edition;
         ISBN = iSBN;
         IdAuthor = idAuthor;
         Publisher = publisher;

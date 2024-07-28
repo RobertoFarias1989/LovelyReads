@@ -1,5 +1,6 @@
 ﻿using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.Book.Commands.CreateBook
@@ -15,12 +16,13 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
 
         public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            var bookCoverPath = Path.Combine("Storage", request.BookCover!.FileName);
+            var bookCoverPath = Path.Combine("BookStorage", request.BookCover!.FileName);
             using Stream fileStream = new FileStream(bookCoverPath, FileMode.Create);
             request.BookCover.CopyTo(fileStream);
 
             var book = new Core.Entities.Book(request.Title!,
                 request.Description!,
+                new Edition(request.EditionNumber, request.EditionDescription!),
                 request.ISBN!,
                 request.IdAuthor,
                 request.Publisher!,

@@ -21,7 +21,7 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
         if (book == null) 
             throw new Exception("The book was not found.");
 
-        var bookReviewsModel = book?.reviews
+        var bookReviewsModel = book.reviews!
             .Where(br => br.IdBook == request.Id)
             .Select(br => new BookReviewViewModel(
                 br.Id,
@@ -36,10 +36,10 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
             book.Description,
             book.ISBN,
             book.IdAuthor,
-            book.Author.Name.FullName,
+            book.Author!.Name.FullName,
             book.Publisher,
             book.IdGenre,
-            book.Genre.Description,
+            book.Genre!.Description,
             book.PublishedYear,
             book.PageAmount,
             book.AverageRating,

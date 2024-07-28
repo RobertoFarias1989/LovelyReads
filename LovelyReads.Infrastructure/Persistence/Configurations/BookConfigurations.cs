@@ -23,12 +23,28 @@ public class BookConfigurations : BaseEntityConfigurations<Book>
             .HasMaxLength(100);
 
         builder
+            .Property(b => b.Edition)
+            .HasMaxLength(100);
+
+        builder
             .Property(b => b.ISBN)
             .HasMaxLength(13);
 
         builder
             .Property (b => b.AverageRating)
             .HasPrecision(10,2);
+
+        //Edition        
+        builder
+            .OwnsOne(b => b.Edition)
+            .Property(b => b.EditionNumber)
+            .HasColumnName("EditionNumber");
+
+        builder
+           .OwnsOne(b => b.Edition)
+           .Property(b => b.EditionDescription)
+           .HasColumnName("EditionDescription")
+           .HasMaxLength(100);
 
         builder
             .HasMany(b => b.reviews)

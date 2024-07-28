@@ -18,7 +18,8 @@ public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, Genre
     {
         var genre = await _unitOfWork.GenreRepository.GetByIdAsync(request.Id);
 
-        if(genre == null) return null;
+        if(genre == null)
+            throw new Exception("The genre was not found.");
 
         var books = genre.Books
             .Where(b => b.IdGenre == genre.Id)
