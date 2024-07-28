@@ -14,7 +14,7 @@ public class BookDetailsViewModel
         int idGenre,
         string genreDescription,
         short publishedYear,
-        short pageAmount, decimal averageRating, byte bookCover, List<BookReviewViewModel> bookReviewsModel)
+        short pageAmount, decimal averageRating, string bookCover, List<BookReviewViewModel> bookReviewsModel)
     {
         Id = id;
         Title = title;
@@ -44,6 +44,6 @@ public class BookDetailsViewModel
     public short PublishedYear { get; private set; }
     public short PageAmount { get; private set; }
     public decimal AverageRating { get; private set; }
-    public byte BookCover { get; private set; }
+    public string BookCover { get; private set; }
     public List<BookReviewViewModel> BookReviewsModel { get; set; }
 }

@@ -49,6 +49,14 @@ namespace LovelyReads.Application.Book.Validators
                .NotNull()
                .WithMessage("BookCover is required.");
 
+            RuleFor(b => b.EditionDescription)
+               .NotEmpty()
+               .WithMessage("EditionDescription is required.")
+               .NotNull()
+               .WithMessage("EditionDescription is required.")
+               .MaximumLength(100)
+               .WithMessage("EditionDescription's maximum length is around 100 characters.");
+
             RuleFor(b => b.ISBN)
                 .NotEmpty()
                 .WithMessage("ISBN is required.")

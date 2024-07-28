@@ -1,4 +1,6 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Entities;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.Author.Commands.UpdateAuthor;
@@ -16,13 +18,28 @@ public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, U
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
-        if(author is not null)
+        if(author != null && author.IsActive == true )
         {
-            author.Update(request.Born,
-                request.Died,
-                request.Description,
-                new Core.ValueObjects.Name(request.FullName),
-                request.Image);
+            if (request.Image != null)
+            {
+                var olderImagePath = author.Image;
+                var imagePath = Path.Combine("AuthorStorage", request.Image!.FileName);
+
+                if (!string.IsNullOrEmpty(olderImagePath) && File.Exists(olderImagePath))
+                {
+                    File.Delete(olderImagePath);
+                }
+
+                using Stream fileStream = new FileStream(imagePath, FileMode.Create);
+                request.Image.CopyTo(fileStream);
+                author.UpdateImage(imagePath);
+            }
+
+
+            author.Update(request.Born!,
+                request.Died!,
+                request.Description!,
+                new Name(request.FullName!));
 
              _unitOfWork.AuthorRepository.UpdateAsync(author);
 
