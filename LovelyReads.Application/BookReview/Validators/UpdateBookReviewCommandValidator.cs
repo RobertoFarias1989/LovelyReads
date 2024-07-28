@@ -8,12 +8,12 @@ public class UpdateBookReviewCommandValidator : AbstractValidator<UpdateBookRevi
 	public UpdateBookReviewCommandValidator()
 	{
         RuleFor(br => br.Comment)
-               .NotEmpty()
-               .WithMessage("Comment is required.")
-               .NotNull()
-               .WithMessage("Comment is required.")
-               .MaximumLength(254)
-               .WithMessage("Comment's maximum length is around 254 characters.");
+              .NotEmpty()
+              .WithMessage("Comment's field musn't be empty.")
+              .NotNull()
+              .WithMessage("Comment's field musn't be null.")
+              .MaximumLength(254)
+              .WithMessage("Comment's maximum length is around 254 characters.");
 
         RuleFor(br => br.Rating)
                .NotEmpty()

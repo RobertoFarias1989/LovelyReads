@@ -8,12 +8,12 @@ public class UpdateAuthorCommandValidator : AbstractValidator<UpdateAuthorComman
     public UpdateAuthorCommandValidator()
     {
         RuleFor(a => a.Born)
-        .NotEmpty()
-        .WithMessage("Born is required.")
-        .NotNull()
-        .WithMessage("Born is required.")
-        .MaximumLength(254)
-        .WithMessage("Born' s maximun lenght is around 254.");
+             .NotEmpty()
+             .WithMessage("Born's field musn't be empty.")
+             .NotNull()
+             .WithMessage("Born's field musn't be null.")
+             .MaximumLength(254)
+             .WithMessage("Born' s maximun lenght is around 254.");
 
         RuleFor(a => a.Died)
             .MaximumLength(254)
@@ -21,24 +21,24 @@ public class UpdateAuthorCommandValidator : AbstractValidator<UpdateAuthorComman
 
         RuleFor(a => a.Description)
             .NotEmpty()
-            .WithMessage("Description is required.")
+            .WithMessage("Description's field musn't be empty.")
             .NotNull()
-            .WithMessage("Description is required.")
+            .WithMessage("Description's field musn't be null.")
             .MaximumLength(254)
             .WithMessage("Description' s maximun lenght is around 254.");
 
         RuleFor(a => a.FullName)
             .NotEmpty()
-            .WithMessage("FullName is required.")
+            .WithMessage("FullName's field musn't be empty.")
             .NotNull()
-            .WithMessage("FullName is required.")
+            .WithMessage("FullName's field musn't be null.")
             .MaximumLength(150)
             .WithMessage("FullName' s maximun lenght is around 150.");
 
         RuleFor(a => a.Image)
             .NotEmpty()
-            .WithMessage("Image is required.")
+            .WithMessage("Image's field musn't be empty.")
             .NotNull()
-            .WithMessage("Image is required.");
+            .WithMessage("Image's field musn't be null.");
     }
 }
