@@ -15,6 +15,11 @@ public class GenreConfigurations : BaseEntityConfigurations<Genre>
             .HasMaxLength(150);
 
         builder
+            .HasIndex(g => g.Description)
+            .IsUnique();
+
+
+        builder
             .HasMany(g => g.Books)
             .WithOne(b => b.Genre)
             .HasForeignKey(b => b.IdGenre)
