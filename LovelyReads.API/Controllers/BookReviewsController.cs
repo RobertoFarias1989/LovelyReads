@@ -35,7 +35,7 @@ namespace LovelyReads.API.Controllers
         {
             var getBookReviewByIdQuery = new GetBookReviewByIdQuery(id);
 
-            var bookReview = await _mediator.Send(id);
+            var bookReview = await _mediator.Send(getBookReviewByIdQuery);
 
             if (bookReview == null) 
             { 

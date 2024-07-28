@@ -17,34 +17,55 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
     public async Task<BookDetailsViewModel> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
     {
         var book = await _unitOfWork.BookRepository.GetDetailsByIdAsync(request.Id);
+        BookDetailsViewModel bookDetailsViewModel;
+
 
         if (book == null) 
-            throw new Exception("The book was not found.");
+            throw new Exception($"The book  with id:{request.Id} was not found.");
 
-        var bookReviewsModel = book.reviews!
-            .Where(br => br.IdBook == request.Id)
-            .Select(br => new BookReviewViewModel(
-                br.Id,
-                br.Rating,
-                br.Comment,
-                br.IdUser,
-                br.IdBook)).ToList();
+        if(book.reviews != null)
+        {
+            var bookReviewsModel = book.reviews!
+           .Where(br => br.IdBook == request.Id)
+           .Select(br => new BookReviewViewModel(
+               br.Id,
+               br.Rating,
+               br.Comment,
+               br.IdUser,
+               br.IdBook)).ToList();
 
-        var bookDetailsViewModel = new BookDetailsViewModel(
-            book.Id,
-            book.Title,
-            book.Description,
-            book.ISBN,
-            book.IdAuthor,
-            book.Author!.Name.FullName,
-            book.Publisher,
-            book.IdGenre,
-            book.Genre!.Description,
-            book.PublishedYear,
-            book.PageAmount,
-            book.AverageRating,
-            book.BookCover,
-            bookReviewsModel);
+             bookDetailsViewModel = new BookDetailsViewModel(
+                book.Id,
+                book.Title,
+                book.Description,
+                book.ISBN,
+                book.IdAuthor,
+                book.Author!.Name.FullName,
+                book.Publisher,
+                book.IdGenre,
+                book.Genre!.Description,
+                book.PublishedYear,
+                book.PageAmount,
+                book.AverageRating,
+                book.BookCover,
+                bookReviewsModel);
+        }
+
+        bookDetailsViewModel = new BookDetailsViewModel(
+                 book.Id,
+                 book.Title,
+                 book.Description,
+                 book.ISBN,
+                 book.IdAuthor,
+                 book.Author!.Name.FullName,
+                 book.Publisher,
+                 book.IdGenre,
+                 book.Genre!.Description,
+                 book.PublishedYear,
+                 book.PageAmount,
+                 book.AverageRating,
+                 book.BookCover,
+                 new List<BookReviewViewModel>());
 
         return bookDetailsViewModel;
 

@@ -1,5 +1,6 @@
 ﻿using LovelyReads.Application.BookReview.ViewModels;
 using LovelyReads.Application.User.ViewModels;
+using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
 using MediatR;
 
@@ -17,10 +18,13 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDet
     public async Task<UserDetailsViewModel> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
         var user = await _unitOfWork!.UserRepository.GetDetailsByIdAsync(request.Id);
-
         UserDetailsViewModel userDetailsViewModel;
 
-        if(user != null)
+        if (user == null)
+            throw new Exception($"The user with id:{request.Id} was not found.");
+
+
+        if (user.BookReviews != null)
         {
             var bookReviews = user.BookReviews
                 .Where(br => br.IdUser == user.Id)
@@ -45,10 +49,19 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDet
                 bookReviews);
 
         }
-        else
-        {
-            throw new Exception("The user was not found.");
-        }
+
+        userDetailsViewModel = new UserDetailsViewModel(
+               user.Address.Street,
+               user.Address.City,
+               user.Address.State,
+               user.Address.PostalCode,
+               user.Address.Country,
+               user.CPF.CPFNumber,
+               user.Email.EmailAddress,
+               user.Name.FullName,
+               user.Password.PasswordValue,
+               new List<BookReviewViewModel>());
+
 
         return userDetailsViewModel;
     }
