@@ -35,7 +35,7 @@ namespace LovelyReads.API.Controllers
         {
             var getGenreByIdQuery = new GetGenreByIdQuery(id);
 
-            var genre = await _mediator.Send(id);
+            var genre = await _mediator.Send(getGenreByIdQuery);
 
             if (genre == null) 
             { 
