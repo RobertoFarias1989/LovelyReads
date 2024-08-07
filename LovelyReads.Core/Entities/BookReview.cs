@@ -6,12 +6,12 @@ public class BookReview : BaseEntity
     {
         
     }
-    public BookReview(byte rating, string comment, int idUser, int idBook)
+    public BookReview(byte rating, string comment, int idUser, int idBookReaded)
     {
         Rating = rating;
         Comment = comment;
         IdUser = idUser;
-        IdBook = idBook;
+        IdBookReaded = idBookReaded;
 
         UpdatedAt = null;
         IsActive = true;
@@ -21,8 +21,8 @@ public class BookReview : BaseEntity
     public string Comment { get; private set; }
     public int IdUser { get; private set; }
     public User? User { get; private set; }
-    public int IdBook { get; private set; }
-    public Book?  Book { get; private set; }
+    public int IdBookReaded { get; private set; }
+    public BookReaded? BookReaded { get; private set; }
 
     public void Update(byte rating, string comment)
     {
