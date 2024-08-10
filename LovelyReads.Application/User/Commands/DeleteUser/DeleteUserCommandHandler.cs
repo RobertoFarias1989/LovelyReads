@@ -16,9 +16,9 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Unit>
     {
         var user = await _unitOfWork.UserRepository.GetByIdAsync(request.Id);
 
-        if(user != null && user.IsActive == true)
+        if(user != null && user.IsDeleted == false)
         {
-            user.Inactived();
+            user.Delete();
 
             _unitOfWork.UserRepository.UpdateAsync(user);
 

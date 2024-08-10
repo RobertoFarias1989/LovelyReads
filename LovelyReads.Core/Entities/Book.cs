@@ -30,9 +30,9 @@ public class Book : BaseEntity
         AverageRating = averageRating;
         BookCover = bookCover;
 
-        BookReadeds = new List<BookReaded>();
+        UserBooks = new List<UserBook>();
         UpdatedAt = null;
-        IsActive = true;
+        IsDeleted = false;
     }
 
     public string Title { get; private set; }
@@ -48,7 +48,7 @@ public class Book : BaseEntity
     public short PageAmount { get; private set; }
     public decimal AverageRating { get; private set; }
     public string BookCover { get; private set; }
-    public List<BookReaded> BookReadeds { get; private set; }
+    public List<UserBook> UserBooks { get; private set; }
 
     public void Update(string title,
         string description,

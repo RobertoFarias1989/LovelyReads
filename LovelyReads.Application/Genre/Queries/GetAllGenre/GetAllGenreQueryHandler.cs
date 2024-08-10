@@ -22,7 +22,7 @@ public class GetAllGenreQueryHandler : IRequestHandler<GetAllGenreQuery, List<Ge
             .Select(g => new GenreViewModel(
                 g.Id,
                 g.Description,
-                g.IsActive,
+                g.IsDeleted,
                 g.CreatedAt,
                 g.UpdatedAt))
             .ToList();

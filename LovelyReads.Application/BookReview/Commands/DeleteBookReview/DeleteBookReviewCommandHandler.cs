@@ -14,14 +14,14 @@ namespace LovelyReads.Application.BookReview.Commands.DeleteBookReview
 
         public async Task<Unit> Handle(DeleteBookReviewCommand request, CancellationToken cancellationToken)
         {
-            var bookReview = await _unitOfWork.BookReviewRepository.GetByIdAsync(request.Id);
+            var bookReview = await _unitOfWork.UserBookReviewRepository.GetByIdAsync(request.Id);
 
-            if(bookReview != null && bookReview.IsActive == true)
+            if(bookReview != null && bookReview.IsDeleted == false)
             {
 
-                bookReview.Inactived();
+                bookReview.Delete();
 
-                _unitOfWork.BookReviewRepository.UpdateAsync(bookReview);
+                _unitOfWork.UserBookReviewRepository.UpdateAsync(bookReview);
 
                 await _unitOfWork.CompleteAsync();
 

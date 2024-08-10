@@ -16,10 +16,10 @@ namespace LovelyReads.Application.BookReview.Commands.CreateBookReview
         public async Task<int> Handle(CreateBookReviewCommand request, CancellationToken cancellationToken)
         {
 
-            var bookReview = new Core.Entities.BookReview(
+            var bookReview = new Core.Entities.UserBookReview(
                 request.Rating, request.Comment!, request.IdUser, request.IdBook);
 
-            await _unitOfWork.BookReviewRepository.AddAsync(bookReview);
+            await _unitOfWork.UserBookReviewRepository.AddAsync(bookReview);
 
             await _unitOfWork.CompleteAsync();
 

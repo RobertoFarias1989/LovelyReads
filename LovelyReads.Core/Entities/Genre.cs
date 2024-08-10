@@ -12,7 +12,7 @@ public class Genre : BaseEntity
 
         UpdatedAt = null;
         Books = new List<Book>();
-        IsActive = true;
+        IsDeleted = false;
 
     }
 

@@ -23,33 +23,33 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
         if (book == null) 
             throw new Exception($"The book  with id:{request.Id} was not found.");
 
-        if(book.reviews != null)
-        {
-            var bookReviewsModel = book.reviews!
-           .Where(br => br.IdBook == request.Id)
-           .Select(br => new BookReviewViewModel(
-               br.Id,
-               br.Rating,
-               br.Comment,
-               br.IdUser,
-               br.IdBook)).ToList();
+        //if(book.UserBooks != null)
+        //{
+        //    var bookReviewsModel = book.UserBooks!
+        //   .Where(br => br.IdBook == request.Id)
+        //   .Select(br => new BookReviewViewModel(
+        //       br.Id,
+        //       br.Rating,
+        //       br.Comment,
+        //       br.IdUser,
+        //       br.IdBook)).ToList();
 
-             bookDetailsViewModel = new BookDetailsViewModel(
-                book.Id,
-                book.Title,
-                book.Description,
-                book.ISBN,
-                book.IdAuthor,
-                book.Author!.Name.FullName,
-                book.Publisher,
-                book.IdGenre,
-                book.Genre!.Description,
-                book.PublishedYear,
-                book.PageAmount,
-                book.AverageRating,
-                book.BookCover,
-                bookReviewsModel);
-        }
+        //     bookDetailsViewModel = new BookDetailsViewModel(
+        //        book.Id,
+        //        book.Title,
+        //        book.Description,
+        //        book.ISBN,
+        //        book.IdAuthor,
+        //        book.Author!.Name.FullName,
+        //        book.Publisher,
+        //        book.IdGenre,
+        //        book.Genre!.Description,
+        //        book.PublishedYear,
+        //        book.PageAmount,
+        //        book.AverageRating,
+        //        book.BookCover,
+        //        bookReviewsModel);
+        //}
 
         bookDetailsViewModel = new BookDetailsViewModel(
                  book.Id,

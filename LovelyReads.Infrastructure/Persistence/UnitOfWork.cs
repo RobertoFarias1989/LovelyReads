@@ -11,14 +11,14 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(LovelyReadsDbContext dbContext, 
         IUserRepository userRepository, 
         IBookRepository bookRepository,
-        IBookReviewRepository bookReviewRepository,
+        IUserBookReviewRepository userBookReviewRepository,
         IGenreRepository genreRepository,
         IAuthorRepository authorRepository)
     {
         _dbContext = dbContext;
         UserRepository = userRepository;
         BookRepository = bookRepository;
-        BookReviewRepository = bookReviewRepository;
+        UserBookReviewRepository = userBookReviewRepository;
         GenreRepository = genreRepository;
         AuthorRepository = authorRepository;
     }
@@ -27,7 +27,7 @@ public class UnitOfWork : IUnitOfWork
 
     public IBookRepository BookRepository { get; }
 
-    public IBookReviewRepository BookReviewRepository { get; }
+    public IUserBookReviewRepository UserBookReviewRepository { get; }
 
     public IGenreRepository GenreRepository { get; }
 

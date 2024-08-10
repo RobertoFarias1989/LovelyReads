@@ -1,28 +1,28 @@
 ﻿namespace LovelyReads.Core.Entities;
 
-public class BookReview : BaseEntity
+public class UserBookReview : BaseEntity
 {
-    public BookReview()
+    public UserBookReview()
     {
         
     }
-    public BookReview(byte rating, string comment, int idUser, int idBookReaded)
+    public UserBookReview(byte rating, string comment, int idUser, int idUserBook)
     {
         Rating = rating;
         Comment = comment;
         IdUser = idUser;
-        IdBookReaded = idBookReaded;
+        IdUserBook = idUserBook;
 
         UpdatedAt = null;
-        IsActive = true;
+        IsDeleted = false;
     }
 
     public byte Rating { get; private set; }
     public string Comment { get; private set; }
     public int IdUser { get; private set; }
     public User? User { get; private set; }
-    public int IdBookReaded { get; private set; }
-    public BookReaded? BookReaded { get; private set; }
+    public int IdUserBook { get; private set; }
+    public UserBook? UserBook { get; private set; }
 
     public void Update(byte rating, string comment)
     {

@@ -1,8 +1,8 @@
 ﻿namespace LovelyReads.Core.Entities;
 
-public class BookReaded : BaseEntity
+public class UserBook : BaseEntity
 {
-    public BookReaded(int idUser, int idBook, DateTime startToReadAt, DateTime finishReadAt, short pageAmountReaded, short pageAmountToFinishRead)
+    public UserBook(int idUser, int idBook, DateTime startToReadAt, DateTime finishReadAt, short pageAmountReaded, short pageAmountToFinishRead)
     {
         IdUser = idUser;
         IdBook = idBook;
@@ -11,7 +11,8 @@ public class BookReaded : BaseEntity
         PageAmountReaded = pageAmountReaded;
         PageAmountToFinishRead = pageAmountToFinishRead;
 
-        Reviews = new List<BookReview>();
+        Reviews = new List<UserBookReview>();
+        IsDeleted = false;
     }
 
     public int IdUser { get; private set; }
@@ -22,6 +23,6 @@ public class BookReaded : BaseEntity
     public DateTime FinishReadAt { get; private set; }
     public short PageAmountReaded { get; private set; }
     public short PageAmountToFinishRead { get; private set; }
-    public List<BookReview>? Reviews { get; private set; }
+    public List<UserBookReview>? Reviews { get; private set; }
 
 }

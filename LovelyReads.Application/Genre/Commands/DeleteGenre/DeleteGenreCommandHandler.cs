@@ -16,9 +16,9 @@ public class DeleteGenreCommandHandler : IRequestHandler<DeleteGenreCommand, Uni
     {
         var genre = await _unitOfWork.GenreRepository.GetByIdAsync(request.Id);
 
-       if(genre is not null && genre.IsActive == true)
+       if(genre != null && genre.IsDeleted == false)
         {
-            genre.Inactived();
+            genre.Delete();
 
             _unitOfWork.GenreRepository.UpdateAsync(genre);
 

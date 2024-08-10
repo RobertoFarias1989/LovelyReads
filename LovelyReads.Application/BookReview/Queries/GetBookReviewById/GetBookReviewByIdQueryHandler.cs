@@ -15,7 +15,7 @@ public class GetBookReviewByIdQueryHandler : IRequestHandler<GetBookReviewByIdQu
 
     public async Task<BookReviewDetailsViewModel> Handle(GetBookReviewByIdQuery request, CancellationToken cancellationToken)
     {
-        var bookReview = await _unitOfWork.BookReviewRepository.GetDetailsByIdAsync(request.Id);
+        var bookReview = await _unitOfWork.UserBookReviewRepository.GetDetailsByIdAsync(request.Id);
 
         if(bookReview != null)
         {
@@ -23,9 +23,9 @@ public class GetBookReviewByIdQueryHandler : IRequestHandler<GetBookReviewByIdQu
                 bookReview.Rating,
                 bookReview.Comment,
                 bookReview.IdUser,
-                bookReview.IdBook,
+                bookReview.IdUserBook,
                 bookReview.User!.Name.FullName,
-                bookReview.Book!.Title);
+                bookReview.UserBook!.Book!.Title);
 
             return bookReviewDetailsViewModel;
         }

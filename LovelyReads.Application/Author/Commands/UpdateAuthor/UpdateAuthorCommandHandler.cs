@@ -18,7 +18,7 @@ public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, U
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
-        if(author != null && author.IsActive == true )
+        if(author != null && author.IsDeleted == false )
         {
             if (request.Image != null)
             {

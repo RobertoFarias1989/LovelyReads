@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LovelyReads.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(LovelyReadsDbContext))]
-    [Migration("20240728031944_InitialMigration")]
+    [Migration("20240810030710_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -100,7 +100,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     b.Property<int>("IdGenre")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<short>("PageAmount")
@@ -131,46 +131,6 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("LovelyReads.Core.Entities.BookReview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(254)
-                        .HasColumnType("nvarchar(254)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdBook")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<byte>("Rating")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdBook");
-
-                    b.HasIndex("IdUser");
-
-                    b.ToTable("BookReviews");
-                });
-
             modelBuilder.Entity("LovelyReads.Core.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -187,7 +147,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -212,7 +172,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -221,6 +181,93 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("LovelyReads.Core.Entities.UserBook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FinishReadAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdBook")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<short>("PageAmountReaded")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("PageAmountToFinishRead")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("StartToReadAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdBook");
+
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("UserBook");
+                });
+
+            modelBuilder.Entity("LovelyReads.Core.Entities.UserBookReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUserBook")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Rating")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserBookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUser");
+
+                    b.HasIndex("UserBookId");
+
+                    b.ToTable("UserBookReviews");
                 });
 
             modelBuilder.Entity("LovelyReads.Core.Entities.Author", b =>
@@ -291,25 +338,6 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Genre");
-                });
-
-            modelBuilder.Entity("LovelyReads.Core.Entities.BookReview", b =>
-                {
-                    b.HasOne("LovelyReads.Core.Entities.Book", "Book")
-                        .WithMany("reviews")
-                        .HasForeignKey("IdBook")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("LovelyReads.Core.Entities.User", "User")
-                        .WithMany("BookReviews")
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("LovelyReads.Core.Entities.User", b =>
@@ -455,6 +483,42 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("LovelyReads.Core.Entities.UserBook", b =>
+                {
+                    b.HasOne("LovelyReads.Core.Entities.Book", "Book")
+                        .WithMany("UserBooks")
+                        .HasForeignKey("IdBook")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("LovelyReads.Core.Entities.User", "User")
+                        .WithMany("UserBooks")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("LovelyReads.Core.Entities.UserBookReview", b =>
+                {
+                    b.HasOne("LovelyReads.Core.Entities.User", "User")
+                        .WithMany("BookReviews")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("LovelyReads.Core.Entities.UserBook", "UserBook")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserBookId");
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserBook");
+                });
+
             modelBuilder.Entity("LovelyReads.Core.Entities.Author", b =>
                 {
                     b.Navigation("Books");
@@ -462,7 +526,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("LovelyReads.Core.Entities.Book", b =>
                 {
-                    b.Navigation("reviews");
+                    b.Navigation("UserBooks");
                 });
 
             modelBuilder.Entity("LovelyReads.Core.Entities.Genre", b =>
@@ -473,6 +537,13 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("LovelyReads.Core.Entities.User", b =>
                 {
                     b.Navigation("BookReviews");
+
+                    b.Navigation("UserBooks");
+                });
+
+            modelBuilder.Entity("LovelyReads.Core.Entities.UserBook", b =>
+                {
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

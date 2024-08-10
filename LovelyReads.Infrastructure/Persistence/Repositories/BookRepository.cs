@@ -33,7 +33,7 @@ public class BookRepository : IBookRepository
     {
         return await _dbContext
             .Books
-            .Include(b => b.reviews)
+            .Include(b => b.UserBooks)
             .AsNoTracking()
             .SingleOrDefaultAsync(b => b.Id == id);
     }

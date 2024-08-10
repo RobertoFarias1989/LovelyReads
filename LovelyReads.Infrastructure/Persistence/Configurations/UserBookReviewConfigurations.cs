@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LovelyReads.Infrastructure.Persistence.Configurations;
 
-public class BookReviewConfigurations : BaseEntityConfigurations<BookReview>
+public class UserBookReviewConfigurations : BaseEntityConfigurations<UserBookReview>
 {
-    public override void Configure(EntityTypeBuilder<BookReview> builder)
+    public override void Configure(EntityTypeBuilder<UserBookReview> builder)
     {
         base.Configure(builder);
 

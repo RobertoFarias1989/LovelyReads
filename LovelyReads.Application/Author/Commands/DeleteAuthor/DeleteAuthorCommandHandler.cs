@@ -16,9 +16,9 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, U
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
-        if (author != null && author.IsActive == true)
+        if (author != null && author.IsDeleted == false)
         {
-            author.Inactived();
+            author.Delete();
 
             _unitOfWork.AuthorRepository.UpdateAsync(author);
 

@@ -17,7 +17,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
     {
         var user = await _unitOfWork.UserRepository.GetByIdAsync(request.Id);
 
-        if (user != null && user.IsActive != false)
+        if (user != null && user.IsDeleted != true)
         {
             user.Update(
                 new Address(request.Street!, request.City!, request.State!, request.PostalCode!, request.Country!),

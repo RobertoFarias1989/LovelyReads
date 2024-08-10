@@ -15,12 +15,12 @@ public class GetAllBookReviewsQueryHandler : IRequestHandler<GetAllBookReviewsQu
 
     public async Task<List<BookReviewViewModel>> Handle(GetAllBookReviewsQuery request, CancellationToken cancellationToken)
     {
-        var bookReviews = await _unitOfWork.BookReviewRepository.GetAllAsync();
+        var bookReviews = await _unitOfWork.UserBookReviewRepository.GetAllAsync();
 
         var bookReviewsModel = bookReviews
-            .Select(br => new BookReviewViewModel(br.Id, br.Rating, br.Comment, br.IdUser, br.IdBook))
+            .Select(br => new BookReviewViewModel(br.Id, br.Rating, br.Comment, br.IdUser, br.IdUserBook))
             .ToList();
 
-        return bookReviewsModel;
+        return bookReviewsModel!;
     }
 }

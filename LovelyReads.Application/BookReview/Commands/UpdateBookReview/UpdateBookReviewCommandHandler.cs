@@ -14,14 +14,14 @@ public class UpdateBookReviewCommandHandler : IRequestHandler<UpdateBookReviewCo
 
     public async Task<Unit> Handle(UpdateBookReviewCommand request, CancellationToken cancellationToken)
     {
-        var bookReview = await _unitOfWork.BookReviewRepository.GetByIdAsync(request.Id);
+        var bookReview = await _unitOfWork.UserBookReviewRepository.GetByIdAsync(request.Id);
 
-        if(bookReview != null && bookReview.IsActive != false)
+        if(bookReview != null && bookReview.IsDeleted != true)
         {
 
             bookReview.Update(request.Rating, request.Comment!);
 
-            _unitOfWork.BookReviewRepository.UpdateAsync(bookReview);
+            _unitOfWork.UserBookReviewRepository.UpdateAsync(bookReview);
 
             await _unitOfWork.CompleteAsync();
 

@@ -33,7 +33,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDet
                     br.Rating,
                     br.Comment,
                     br.IdUser,
-                    br.IdBook))
+                    br.IdUserBook))
                 .ToList();
 
             userDetailsViewModel = new UserDetailsViewModel(

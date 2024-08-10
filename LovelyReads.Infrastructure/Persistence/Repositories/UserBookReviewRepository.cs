@@ -4,49 +4,49 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LovelyReads.Infrastructure.Persistence.Repositories;
 
-public class BookReviewRepository : IBookReviewRepository
+public class UserBookReviewRepository : IUserBookReviewRepository
 {
     private readonly LovelyReadsDbContext _dbContext;
 
-    public BookReviewRepository(LovelyReadsDbContext dbContext)
+    public UserBookReviewRepository(LovelyReadsDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<List<BookReview>> GetAllAsync()
+    public async Task<List<UserBookReview>> GetAllAsync()
     {
         return await _dbContext
-            .BookReviews
+            .UserBookReviews
             .AsNoTracking()
             .ToListAsync();
     }
 
-    public async Task<BookReview?> GetByIdAsync(int id)
+    public async Task<UserBookReview?> GetByIdAsync(int id)
     {
         return await _dbContext
-            .BookReviews
+            .UserBookReviews
             .AsNoTracking()
             .SingleOrDefaultAsync(br => br.Id == id);
     }
 
-    public async Task<BookReview?> GetDetailsByIdAsync(int id)
+    public async Task<UserBookReview?> GetDetailsByIdAsync(int id)
     {
         return await _dbContext
-            .BookReviews
+            .UserBookReviews
             .AsNoTracking()
             .Include(br => br.User)
-            .Include(br => br.Book)
+            .Include(br => br.UserBook)
             .SingleOrDefaultAsync(br => br.Id == id);
 
     }
 
-    public async Task AddAsync(BookReview bookReview)
+    public async Task AddAsync(UserBookReview bookReview)
     {
-        await _dbContext.BookReviews.AddAsync(bookReview);
+        await _dbContext.UserBookReviews.AddAsync(bookReview);
     }
 
-    public void UpdateAsync(BookReview bookReview)
+    public void UpdateAsync(UserBookReview bookReview)
     {
-        _dbContext.BookReviews.Update(bookReview);
+        _dbContext.UserBookReviews.Update(bookReview);
     }
 }
