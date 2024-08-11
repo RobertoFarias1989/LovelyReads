@@ -37,7 +37,7 @@ public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, Genre
              genreDetailsViewModel = new GenreDetailsViewModel(
                 genre.Id,
                 genre.Description,
-                genre.IsActive,
+                genre.IsDeleted,
                 genre.CreatedAt,
                 genre.UpdatedAt,
                 books);
@@ -46,7 +46,7 @@ public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, Genre
         genreDetailsViewModel = new GenreDetailsViewModel(
                genre.Id,
                genre.Description,
-               genre.IsActive,
+               genre.IsDeleted,
                genre.CreatedAt,
                genre.UpdatedAt,
                new List<BookViewModel>());

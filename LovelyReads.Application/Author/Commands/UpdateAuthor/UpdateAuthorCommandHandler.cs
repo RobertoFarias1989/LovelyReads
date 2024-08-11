@@ -18,7 +18,7 @@ public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, U
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
-        if(author != null && author.IsActive == true )
+        if(author != null && author.IsDeleted != true )
         {
             if (request.Image != null)
             {
@@ -39,9 +39,7 @@ public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, U
             author.Update(request.Born!,
                 request.Died!,
                 request.Description!,
-                new Name(request.FullName!));
-
-             _unitOfWork.AuthorRepository.UpdateAsync(author);
+                new Name(request.FullName!)); 
 
             await _unitOfWork.CompleteAsync();
 

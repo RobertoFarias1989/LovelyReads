@@ -24,8 +24,7 @@ public class BookRepository : IBookRepository
     public async Task<Book?> GetByIdAsync(int id)
     {
         return await _dbContext
-            .Books
-            .AsNoTracking()
+            .Books     
             .SingleOrDefaultAsync(b => b.Id == id);
     }
 
@@ -33,8 +32,7 @@ public class BookRepository : IBookRepository
     {
         return await _dbContext
             .Books
-            .Include(b => b.reviews)
-            .AsNoTracking()
+            .Include(b => b.UserBooks)    
             .SingleOrDefaultAsync(b => b.Id == id);
     }
 
@@ -43,8 +41,4 @@ public class BookRepository : IBookRepository
         await _dbContext.Books.AddAsync(book);
     }
 
-    public void UpdateAsync(Book book)
-    {
-         _dbContext.Books.Update(book);
-    }
 }

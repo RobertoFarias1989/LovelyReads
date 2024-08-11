@@ -16,7 +16,7 @@ public class Book : BaseEntity
         string publisher,
         int idGenre,
         short publishedYear,
-        short pageAmount, decimal averageRating, string bookCover)
+        short pageAmount, string bookCover)
     {
         Title = title;
         Description = description;
@@ -26,13 +26,15 @@ public class Book : BaseEntity
         Publisher = publisher;
         IdGenre = idGenre;
         PublishedYear = publishedYear;
-        PageAmount = pageAmount;
-        AverageRating = averageRating;
+        PageAmount = pageAmount; 
         BookCover = bookCover;
 
-        reviews = new List<BookReview>();
+        CreatedAt = DateTime.Now;
         UpdatedAt = null;
-        IsActive = true;
+        IsDeleted = false;
+        AverageRating = 0;
+        UserBooks = new List<UserBook>();       
+      
     }
 
     public string Title { get; private set; }
@@ -48,9 +50,8 @@ public class Book : BaseEntity
     public short PageAmount { get; private set; }
     public decimal AverageRating { get; private set; }
     public string BookCover { get; private set; }
-    public List<BookReview>?  reviews { get; private set; }
+    public List<UserBook> UserBooks { get; private set; }
 
-   
     public void Update(string title,
         string description,
         Edition edition,
@@ -59,7 +60,7 @@ public class Book : BaseEntity
         string publisher,
         int idGenre,
         short publishedYear,
-        short pageAmount, decimal averageRating)
+        short pageAmount)
     {
         Title = title;
         Description = description;
@@ -70,12 +71,13 @@ public class Book : BaseEntity
         IdGenre = idGenre;
         PublishedYear = publishedYear;
         PageAmount = pageAmount;
-        AverageRating = averageRating;
     }
 
     public void UpdateBookCover(string path)
     {
         BookCover = path;
     }
+
+    //TODO : criar método para atualizar a AverageRating a cada avalição da UserBook
 
 }

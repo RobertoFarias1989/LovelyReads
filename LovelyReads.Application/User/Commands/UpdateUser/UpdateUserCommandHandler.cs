@@ -17,16 +17,14 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
     {
         var user = await _unitOfWork.UserRepository.GetByIdAsync(request.Id);
 
-        if (user != null && user.IsActive != false)
+        if (user != null && user.IsDeleted != true)
         {
             user.Update(
                 new Address(request.Street!, request.City!, request.State!, request.PostalCode!, request.Country!),
                 new CPF(request.CPFNumber!),
                 new Email(request.EmailAddress!),
                 new Name(request.FullName!),
-                new Password(request.PasswordValue!));
-
-            _unitOfWork.UserRepository.UpdateAsync(user);
+                new Password(request.PasswordValue!));     
 
             await _unitOfWork.CompleteAsync();
         }

@@ -10,9 +10,11 @@ public class Genre : BaseEntity
     {
         Description = description;
 
+        CreatedAt = DateTime.Now;
         UpdatedAt = null;
+        IsDeleted = false;
         Books = new List<Book>();
-        IsActive = true;
+   
 
     }
 

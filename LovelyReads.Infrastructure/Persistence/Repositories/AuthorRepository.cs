@@ -24,8 +24,7 @@ public class AuthorRepository : IAuthorRepository
     public async Task<Author?> GetByIdAsync(int id)
     {
         return await _dbContext
-            .Authors
-            .AsNoTracking()
+            .Authors      
             .SingleOrDefaultAsync(a => a.Id == id);
     }
 
@@ -33,8 +32,7 @@ public class AuthorRepository : IAuthorRepository
     {
         return await _dbContext
             .Authors
-            .Include(a => a.Books)
-            .AsNoTracking()
+            .Include(a => a.Books)    
             .SingleOrDefaultAsync(a => a.Id == id);
     }
 
@@ -43,8 +41,4 @@ public class AuthorRepository : IAuthorRepository
         await _dbContext.Authors.AddAsync(author);
     }
 
-    public void UpdateAsync(Author author)
-    {
-         _dbContext.Authors.Update(author);
-    }
 }

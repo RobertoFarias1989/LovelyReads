@@ -1,5 +1,5 @@
 ﻿using LovelyReads.Application.Book.ViewModels;
-using LovelyReads.Application.BookReview.ViewModels;
+using LovelyReads.Application.UserBook.ViewModels;
 using LovelyReads.Core.Repositories;
 using MediatR;
 
@@ -23,32 +23,30 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
         if (book == null) 
             throw new Exception($"The book  with id:{request.Id} was not found.");
 
-        if(book.reviews != null)
+        if (book.UserBooks != null)
         {
-            var bookReviewsModel = book.reviews!
+            var userBookReviewsModel = book.UserBooks!
            .Where(br => br.IdBook == request.Id)
-           .Select(br => new BookReviewViewModel(
+           .Select(br => new UserBookViewModel(
                br.Id,
-               br.Rating,
-               br.Comment,
                br.IdUser,
                br.IdBook)).ToList();
 
-             bookDetailsViewModel = new BookDetailsViewModel(
-                book.Id,
-                book.Title,
-                book.Description,
-                book.ISBN,
-                book.IdAuthor,
-                book.Author!.Name.FullName,
-                book.Publisher,
-                book.IdGenre,
-                book.Genre!.Description,
-                book.PublishedYear,
-                book.PageAmount,
-                book.AverageRating,
-                book.BookCover,
-                bookReviewsModel);
+            bookDetailsViewModel = new BookDetailsViewModel(
+               book.Id,
+               book.Title,
+               book.Description,
+               book.ISBN,
+               book.IdAuthor,
+               book.Author!.Name.FullName,
+               book.Publisher,
+               book.IdGenre,
+               book.Genre!.Description,
+               book.PublishedYear,
+               book.PageAmount,
+               book.AverageRating,
+               book.BookCover,
+               userBookReviewsModel);
         }
 
         bookDetailsViewModel = new BookDetailsViewModel(
@@ -65,7 +63,7 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
                  book.PageAmount,
                  book.AverageRating,
                  book.BookCover,
-                 new List<BookReviewViewModel>());
+                 new List<UserBookViewModel>());
 
         return bookDetailsViewModel;
 

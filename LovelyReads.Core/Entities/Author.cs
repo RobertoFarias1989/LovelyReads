@@ -16,8 +16,9 @@ public class Author : BaseEntity
         Name = name;
         Image = image;
 
-        IsActive = true;
+        CreatedAt = DateTime.Now;
         UpdatedAt = null;
+        IsDeleted = false;  
         //Genres = new List<Genre>();
         Books = new List<Book>();
         

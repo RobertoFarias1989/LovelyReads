@@ -17,7 +17,7 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
     {
         var book = await _unitOfWork.BookRepository.GetByIdAsync(request.Id);
 
-        if(book != null && book.IsActive == true)
+        if(book != null && book.IsDeleted == false)
         {
             if (request.BookCover != null)
             {
@@ -43,10 +43,7 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
                 request.Publisher!,
                 request.IdGenre,
                 request.PublishedYear,
-                request.PageAmount,
-                request.AverageRating);
-
-            _unitOfWork.BookRepository.UpdateAsync(book);
+                request.PageAmount);   
 
             await _unitOfWork.CompleteAsync();
         }

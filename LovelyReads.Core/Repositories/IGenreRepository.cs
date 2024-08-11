@@ -8,6 +8,4 @@ public interface IGenreRepository
     Task<Genre?> GetByIdAsync(int id);
     Task<Genre?> GetDetailsByIdAsync(int id);
     Task AddAsync(Genre genre);
-    void UpdateAsync(Genre genre);
-    //Task UpdateAsync(Genre genre);
 }

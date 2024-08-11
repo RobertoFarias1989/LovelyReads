@@ -16,6 +16,12 @@ public class UserConfigurations : BaseEntityConfigurations<User>
             .HasForeignKey(br => br.IdUser)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder
+            .HasMany(u => u.UserBooks)
+            .WithOne(ub => ub.User)
+            .HasForeignKey(ub => ub.IdUser)
+            .OnDelete(DeleteBehavior.Restrict);
+
         //Name
         builder
             .OwnsOne(u => u.Name)

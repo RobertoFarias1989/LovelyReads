@@ -23,7 +23,8 @@ namespace LovelyReads.Infrastructure.ExthensionMethods
         {
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
-            services.AddScoped<IBookReviewRepository, BookReviewRepository>();
+            services.AddScoped<IUserBookRepository, UserBookRepository>();
+            services.AddScoped<IUserBookReviewRepository, UserBookReviewRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 

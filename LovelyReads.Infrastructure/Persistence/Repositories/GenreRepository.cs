@@ -26,7 +26,6 @@ public class GenreRepository : IGenreRepository
     {
         return await _dbContext
             .Genres
-            .AsNoTracking()
             .SingleOrDefaultAsync(g => g.Id == id);
     }
 
@@ -34,7 +33,6 @@ public class GenreRepository : IGenreRepository
     {
         return await _dbContext
             .Genres
-            .AsNoTracking()
             .Include(g => g.Books)
             .SingleOrDefaultAsync(g => g.Id == id);
     }
@@ -44,8 +42,4 @@ public class GenreRepository : IGenreRepository
         await _dbContext.Genres.AddAsync(genre);
     }
 
-    public void UpdateAsync(Genre genre)
-    {
-        _dbContext.Genres.Update(genre);
-    }
 }

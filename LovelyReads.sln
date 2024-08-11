@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovelyReads.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovelyReads.Application", "LovelyReads.Application\LovelyReads.Application.csproj", "{595CBB90-5DC7-46F0-866F-F3795A575869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovelyReads.API", "LovelyReads.API\LovelyReads.API.csproj", "{AC1A3179-6FAF-4A7A-86E7-9B68EDD73510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovelyReads.API", "LovelyReads.API\LovelyReads.API.csproj", "{AC1A3179-6FAF-4A7A-86E7-9B68EDD73510}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
