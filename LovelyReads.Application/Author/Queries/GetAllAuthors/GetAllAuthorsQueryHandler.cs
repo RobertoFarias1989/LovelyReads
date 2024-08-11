@@ -18,6 +18,7 @@ public class GetAllAuthorsQueryHandler : IRequestHandler<GetAllAuthorsQuery, Lis
         var author = await _unitOfWork.AuthorRepository.GetAllAsync();
 
         var authorViewModel = author
+            .Where(entity => entity.IsDeleted == false)
             .Select(a => new AuthorViewModel(a.Id, a.Description, a.Name.FullName, a.Image))
             .ToList();
 

@@ -17,9 +17,9 @@ public class UpdateUserBookReviewCommandValidator : AbstractValidator<UpdateUser
 
         RuleFor(br => br.Rating)
                .NotEmpty()
-               .WithMessage("Comment is required.")
+               .WithMessage("Rating's field mustn't be empty.")
                .NotNull()
-               .WithMessage("Comment is required.")
+               .WithMessage("Rating's field mustn't be null.")
                .Must(rating => rating >= 1 && rating <= 5)
                .WithMessage("Rating must be between 1 and 5.");
     }

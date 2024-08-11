@@ -3,6 +3,6 @@ using MediatR;
 
 namespace LovelyReads.Application.Genre.Queries.GetAllGenre;
 
-public class GetAllGenreQuery : IRequest<List<GenreViewModel>>
+public class GetAllGenresQuery : IRequest<List<GenreViewModel>>
 {
 }

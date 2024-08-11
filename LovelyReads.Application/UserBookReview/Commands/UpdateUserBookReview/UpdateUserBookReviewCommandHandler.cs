@@ -26,7 +26,7 @@ public class UpdateUserBookReviewCommandHandler : IRequestHandler<UpdateUserBook
         }
         else
         {
-            throw new Exception("The BookReview was not found or it's already inactived.");
+            throw new Exception("The UserBookReview was not found or it's already inactived.");
         }
 
         return Unit.Value;

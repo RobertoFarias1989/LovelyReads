@@ -3,7 +3,7 @@ using MediatR;
 
 namespace LovelyReads.Application.UserBook.Queries.GetAllUserBook;
 
-public class GetAllUserBookQuery : IRequest<List<UserBookViewModel>>
+public class GetAllUserBooksQuery : IRequest<List<UserBookViewModel>>
 {
 
 }

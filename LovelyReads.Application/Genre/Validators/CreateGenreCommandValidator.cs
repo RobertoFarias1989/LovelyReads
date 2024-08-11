@@ -14,5 +14,7 @@ public class CreateGenreCommandValidator : AbstractValidator<CreateGenreCommand>
             .WithMessage("Description's field mustn't be null.")
             .MaximumLength(150)
 			.WithMessage("Description' s maximun lenght is around 150.");
+
+		//TODO: Pensar em uma forma de validar o nome do genre para que não seja possível cadastrar um nome qualquer
     }
 }

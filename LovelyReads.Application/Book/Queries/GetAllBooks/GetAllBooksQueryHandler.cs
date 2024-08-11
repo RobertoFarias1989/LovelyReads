@@ -18,6 +18,7 @@ namespace LovelyReads.Application.Book.Queries.GetAllBooks
             var books = await _unitOfWork.BookRepository.GetAllAsync();
 
             var booksViewModel = books
+                .Where(entity => entity.IsDeleted == false)
                 .Select(b => new BookViewModel(
                     b.Id,
                     b.Title,

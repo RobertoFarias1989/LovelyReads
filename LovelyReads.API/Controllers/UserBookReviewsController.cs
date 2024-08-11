@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LovelyReads.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/userbookreviews")]
     [ApiController]
     public class UserBookReviewsController : ControllerBase
     {

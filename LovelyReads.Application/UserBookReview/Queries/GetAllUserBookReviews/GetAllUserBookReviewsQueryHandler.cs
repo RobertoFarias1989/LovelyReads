@@ -18,6 +18,7 @@ public class GetAllUserBookReviewsQueryHandler : IRequestHandler<GetAllUserBookR
         var bookReviews = await _unitOfWork.UserBookReviewRepository.GetAllAsync();
 
         var bookReviewsModel = bookReviews
+            .Where(entity => entity.IsDeleted == false)
             .Select(br => new UserBookReviewViewModel(br.Id, br.Rating, br.Comment, br.IdUser, br.IdUserBook))
             .ToList();
 

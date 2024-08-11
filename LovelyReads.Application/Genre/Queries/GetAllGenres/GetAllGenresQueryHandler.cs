@@ -5,20 +5,21 @@ using MediatR;
 
 namespace LovelyReads.Application.Genre.Queries.GetAllGenre;
 
-public class GetAllGenreQueryHandler : IRequestHandler<GetAllGenreQuery, List<GenreViewModel>>
+public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, List<GenreViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetAllGenreQueryHandler(IUnitOfWork unitOfWork)
+    public GetAllGenresQueryHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<GenreViewModel>> Handle(GetAllGenreQuery request, CancellationToken cancellationToken)
+    public async Task<List<GenreViewModel>> Handle(GetAllGenresQuery request, CancellationToken cancellationToken)
     {
         var genre = await _unitOfWork.GenreRepository.GetAllAsync();
 
         var genreViewModel = genre
+            .Where(entity => entity.IsDeleted == false)
             .Select(g => new GenreViewModel(
                 g.Id,
                 g.Description,

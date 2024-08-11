@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LovelyReads.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/genres")]
     [ApiController]
     public class GenresController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace LovelyReads.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var getAllGenreQuery = new GetAllGenreQuery();
+            var getAllGenreQuery = new GetAllGenresQuery();
 
             var genres = await _mediator.Send(getAllGenreQuery);
 

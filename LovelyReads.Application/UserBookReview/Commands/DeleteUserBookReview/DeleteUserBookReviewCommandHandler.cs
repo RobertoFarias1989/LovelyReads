@@ -26,7 +26,7 @@ namespace LovelyReads.Application.UserBookReview.Commands.DeleteBookReview
             }
             else
             {
-                throw new Exception($"The BookReview with id: {request.Id} was not found or it's already inatived.");
+                throw new Exception($"The UserBookReview with id: {request.Id} was not found or it's already inatived.");
             }
 
             return Unit.Value;
