@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LovelyReads.Infrastructure.ExthensionMethods
+namespace LovelyReads.Infrastructure.ExtensionMethods
 {
     public static class InfraDependencyInjection
     {
