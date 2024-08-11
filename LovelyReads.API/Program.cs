@@ -1,5 +1,6 @@
-using LovelyReads.Application.ExthensionMethods;
-using LovelyReads.Infrastructure.ExthensionMethods;
+using LovelyReads.API.ExtensionMethods;
+using LovelyReads.Application.ExtensionMethods;
+using LovelyReads.Infrastructure.ExtensionMethods;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
 }
+
+app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
 

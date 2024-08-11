@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace LovelyReads.Application.ExthensionMethods
+namespace LovelyReads.Application.ExtensionMethods
 {
     public static class ApplicationDependencyInjection
     {
