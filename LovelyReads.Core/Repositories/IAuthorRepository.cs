@@ -10,7 +10,5 @@ public interface IAuthorRepository
     Task<Author?> GetByIdAsync(int id);
     Task<Author?> GetDetailsByIdAsync(int id);
     Task AddAsync(Author author);
-    void UpdateAsync(Author author);
-    //Task UpdateAsync(Author author);
 
 }

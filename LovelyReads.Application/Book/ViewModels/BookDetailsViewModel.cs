@@ -1,4 +1,5 @@
-﻿using LovelyReads.Application.BookReview.ViewModels;
+﻿using LovelyReads.Application.UserBookReview.ViewModels;
+using LovelyReads.Application.UserBook.ViewModels;
 
 namespace LovelyReads.Application.Book.ViewModels;
 
@@ -14,7 +15,7 @@ public class BookDetailsViewModel
         int idGenre,
         string genreDescription,
         short publishedYear,
-        short pageAmount, decimal averageRating, string bookCover, List<BookReviewViewModel> bookReviewsModel)
+        short pageAmount, decimal averageRating, string bookCover, List<UserBookViewModel> userBookReviewsModel)
     {
         Id = id;
         Title = title;
@@ -29,7 +30,7 @@ public class BookDetailsViewModel
         PageAmount = pageAmount;
         AverageRating = averageRating;
         BookCover = bookCover;
-        this.BookReviewsModel = bookReviewsModel;
+        UserBookReviewsModel = userBookReviewsModel;
     }
 
     public int Id { get; private set; }
@@ -45,5 +46,5 @@ public class BookDetailsViewModel
     public short PageAmount { get; private set; }
     public decimal AverageRating { get; private set; }
     public string BookCover { get; private set; }
-    public List<BookReviewViewModel> BookReviewsModel { get; set; }
+    public List<UserBookViewModel> UserBookReviewsModel { get; set; }
 }

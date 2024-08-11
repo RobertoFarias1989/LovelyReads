@@ -14,8 +14,7 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
         public string? Publisher { get;  set; }
         public int IdGenre { get;  set; }
         public short PublishedYear { get;  set; }
-        public short PageAmount { get;  set; }
-        public decimal AverageRating { get;  set; }
+        public short PageAmount { get;  set; }        
         public IFormFile? BookCover { get;  set; }
     }
 }

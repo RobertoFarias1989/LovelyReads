@@ -20,7 +20,9 @@ public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, i
         //você vai receber os parâmetros e passar para a entidade;
 
         var imagePath = Path.Combine("AuthorStorage", request.Image!.FileName);
+
         using Stream fileStream = new FileStream(imagePath, FileMode.Create);
+
         request.Image.CopyTo(fileStream);
 
         var author = new Core.Entities.Author(

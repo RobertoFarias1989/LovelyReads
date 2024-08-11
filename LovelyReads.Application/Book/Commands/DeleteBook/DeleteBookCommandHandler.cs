@@ -16,11 +16,9 @@ namespace LovelyReads.Application.Book.Commands.DeleteBook
         {
             var book = await _unitOfWork.BookRepository.GetByIdAsync(request.Id);
 
-            if(book is not null && book.IsActive == true)
+            if(book != null && book.IsDeleted != true)
             {
-                book.Inactived();
-
-                _unitOfWork.BookRepository.UpdateAsync(book);
+                book.Delete();
 
                 await _unitOfWork.CompleteAsync();
             }

@@ -6,12 +6,19 @@ namespace LovelyReads.Application.User.Queries.GetAllUsers;
 
 public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<UserViewModel>>
 {
-    private readonly IUnitOfWork? _unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public GetAllUsersQueryHandler(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+
     public async Task<List<UserViewModel>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
         var users = await _unitOfWork!.UserRepository.GetAllAsync();
 
         var userViewModel = users
+            .Where(entity => entity.IsDeleted == false)
             .Select(u => new UserViewModel(
                 u.Address.Street,
                 u.Address.City,

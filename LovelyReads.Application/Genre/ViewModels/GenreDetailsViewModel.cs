@@ -6,14 +6,14 @@ public class GenreDetailsViewModel
 {
     public GenreDetailsViewModel(int id,
         string description,
-        bool isActive,
+        bool isDeleted,
         DateTime createdAt,
         DateTime? updatedAt,
         List<BookViewModel> bookViewModels)
     {
         Id = id;
         Description = description;
-        IsActive = isActive;
+        IsDeleted = isDeleted;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
         this.bookViewModels = bookViewModels;
@@ -21,7 +21,7 @@ public class GenreDetailsViewModel
 
     public int Id { get; private set; }
     public string Description { get; private set; }
-    public bool IsActive { get; private set; }
+    public bool IsDeleted { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
     public List<BookViewModel> bookViewModels { get; private set; }

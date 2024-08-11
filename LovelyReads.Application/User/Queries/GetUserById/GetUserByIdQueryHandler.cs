@@ -1,4 +1,4 @@
-﻿using LovelyReads.Application.BookReview.ViewModels;
+﻿using LovelyReads.Application.UserBookReview.ViewModels;
 using LovelyReads.Application.User.ViewModels;
 using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
@@ -23,17 +23,18 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDet
         if (user == null)
             throw new Exception($"The user with id:{request.Id} was not found.");
 
+        //TODO: ver qual lista exibir se a de Review ou de UserBook
 
         if (user.BookReviews != null)
         {
             var bookReviews = user.BookReviews
                 .Where(br => br.IdUser == user.Id)
-                .Select(br => new BookReviewViewModel(
+                .Select(br => new UserBookReviewViewModel(
                     br.Id,
                     br.Rating,
                     br.Comment,
                     br.IdUser,
-                    br.IdBook))
+                    br.IdUserBook))
                 .ToList();
 
             userDetailsViewModel = new UserDetailsViewModel(
@@ -60,7 +61,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDet
                user.Email.EmailAddress,
                user.Name.FullName,
                user.Password.PasswordValue,
-               new List<BookReviewViewModel>());
+               new List<UserBookReviewViewModel>());
 
 
         return userDetailsViewModel;

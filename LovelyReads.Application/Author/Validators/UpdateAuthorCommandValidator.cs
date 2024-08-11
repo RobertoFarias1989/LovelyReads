@@ -9,9 +9,9 @@ public class UpdateAuthorCommandValidator : AbstractValidator<UpdateAuthorComman
     {
         RuleFor(a => a.Born)
              .NotEmpty()
-             .WithMessage("Born's field musn't be empty.")
+             .WithMessage("Born's field mustn't be empty.")
              .NotNull()
-             .WithMessage("Born's field musn't be null.")
+             .WithMessage("Born's field mustn't be null.")
              .MaximumLength(254)
              .WithMessage("Born' s maximun lenght is around 254.");
 
@@ -21,24 +21,24 @@ public class UpdateAuthorCommandValidator : AbstractValidator<UpdateAuthorComman
 
         RuleFor(a => a.Description)
             .NotEmpty()
-            .WithMessage("Description's field musn't be empty.")
+            .WithMessage("Description's field mustn't be empty.")
             .NotNull()
-            .WithMessage("Description's field musn't be null.")
+            .WithMessage("Description's field mustn't be null.")
             .MaximumLength(254)
             .WithMessage("Description' s maximun lenght is around 254.");
 
         RuleFor(a => a.FullName)
             .NotEmpty()
-            .WithMessage("FullName's field musn't be empty.")
+            .WithMessage("FullName's field mustn't be empty.")
             .NotNull()
-            .WithMessage("FullName's field musn't be null.")
+            .WithMessage("FullName's field mustn't be null.")
             .MaximumLength(150)
             .WithMessage("FullName' s maximun lenght is around 150.");
 
         RuleFor(a => a.Image)
             .NotEmpty()
-            .WithMessage("Image's field musn't be empty.")
+            .WithMessage("Image's field mustn't be empty.")
             .NotNull()
-            .WithMessage("Image's field musn't be null.");
+            .WithMessage("Image's field mustn't be null.");
     }
 }

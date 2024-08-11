@@ -43,9 +43,9 @@ public class BookConfigurations : BaseEntityConfigurations<Book>
            .HasMaxLength(100);
 
         builder
-            .HasMany(b => b.reviews)
-            .WithOne(br => br.Book)
-            .HasForeignKey(br => br.IdBook)
+            .HasMany(b => b.UserBooks)
+            .WithOne(ub => ub.Book)
+            .HasForeignKey(ub => ub.IdBook)
             .OnDelete(DeleteBehavior.Restrict);
 
     }
