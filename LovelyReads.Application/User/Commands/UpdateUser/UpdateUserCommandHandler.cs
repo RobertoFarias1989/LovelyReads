@@ -24,9 +24,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
                 new CPF(request.CPFNumber!),
                 new Email(request.EmailAddress!),
                 new Name(request.FullName!),
-                new Password(request.PasswordValue!));
-
-            _unitOfWork.UserRepository.UpdateAsync(user);
+                new Password(request.PasswordValue!));     
 
             await _unitOfWork.CompleteAsync();
         }

@@ -192,7 +192,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FinishReadAt")
+                    b.Property<DateTime?>("FinishReadAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("IdBook")
@@ -222,7 +222,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("IdUser");
 
-                    b.ToTable("UserBook");
+                    b.ToTable("UserBooks");
                 });
 
             modelBuilder.Entity("LovelyReads.Core.Entities.UserBookReview", b =>

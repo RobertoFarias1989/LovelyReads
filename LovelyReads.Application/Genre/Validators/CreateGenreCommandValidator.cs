@@ -9,9 +9,9 @@ public class CreateGenreCommandValidator : AbstractValidator<CreateGenreCommand>
 	{
 		RuleFor(g => g.Description)
 			.NotEmpty()
-			.WithMessage("Description's field musn't be empty.")
+			.WithMessage("Description's field mustn't be empty.")
 			.NotNull()
-            .WithMessage("Description's field musn't be null.")
+            .WithMessage("Description's field mustn't be null.")
             .MaximumLength(150)
 			.WithMessage("Description' s maximun lenght is around 150.");
     }

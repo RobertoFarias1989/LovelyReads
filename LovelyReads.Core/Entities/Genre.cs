@@ -10,9 +10,11 @@ public class Genre : BaseEntity
     {
         Description = description;
 
+        CreatedAt = DateTime.Now;
         UpdatedAt = null;
-        Books = new List<Book>();
         IsDeleted = false;
+        Books = new List<Book>();
+   
 
     }
 

@@ -28,8 +28,7 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
                 request.Publisher!,
                 request.IdGenre,
                 request.PublishedYear,
-                request.PageAmount,
-                request.AverageRating,
+                request.PageAmount,          
                 bookCoverPath);
 
             await _unitOfWork.BookRepository.AddAsync(book);

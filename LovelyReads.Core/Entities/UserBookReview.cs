@@ -13,6 +13,7 @@ public class UserBookReview : BaseEntity
         IdUser = idUser;
         IdUserBook = idUserBook;
 
+        CreatedAt = DateTime.Now;
         UpdatedAt = null;
         IsDeleted = false;
     }

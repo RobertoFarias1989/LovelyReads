@@ -4,6 +4,7 @@ public interface IUnitOfWork
 {
     public IUserRepository UserRepository { get; }
     public IBookRepository BookRepository { get; }
+    public IUserBookRepository UserBookRepository { get; }
     public IUserBookReviewRepository  UserBookReviewRepository { get; }
     public IGenreRepository GenreRepository { get; }
     public IAuthorRepository AuthorRepository { get; }

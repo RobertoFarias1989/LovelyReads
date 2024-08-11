@@ -20,8 +20,6 @@ namespace LovelyReads.Application.Book.Commands.DeleteBook
             {
                 book.Delete();
 
-                _unitOfWork.BookRepository.UpdateAsync(book);
-
                 await _unitOfWork.CompleteAsync();
             }
             else

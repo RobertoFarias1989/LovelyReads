@@ -25,7 +25,6 @@ public class UserBookReviewRepository : IUserBookReviewRepository
     {
         return await _dbContext
             .UserBookReviews
-            .AsNoTracking()
             .SingleOrDefaultAsync(br => br.Id == id);
     }
 
@@ -33,7 +32,6 @@ public class UserBookReviewRepository : IUserBookReviewRepository
     {
         return await _dbContext
             .UserBookReviews
-            .AsNoTracking()
             .Include(br => br.User)
             .Include(br => br.UserBook)
             .SingleOrDefaultAsync(br => br.Id == id);
@@ -45,8 +43,4 @@ public class UserBookReviewRepository : IUserBookReviewRepository
         await _dbContext.UserBookReviews.AddAsync(bookReview);
     }
 
-    public void UpdateAsync(UserBookReview bookReview)
-    {
-        _dbContext.UserBookReviews.Update(bookReview);
-    }
 }

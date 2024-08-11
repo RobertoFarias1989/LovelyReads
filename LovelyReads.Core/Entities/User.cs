@@ -16,9 +16,11 @@ public class User : BaseEntity
         Name = name;
         Password = password;
 
+        CreatedAt = DateTime.UtcNow;
         UpdatedAt = null;
-        BookReviews = new List<UserBookReview>();
         IsDeleted = false;
+        BookReviews = new List<UserBookReview>();
+
     }
 
     public Address Address { get; private set; }

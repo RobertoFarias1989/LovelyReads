@@ -16,6 +16,5 @@ public class UpdateBookCommand : IRequest<Unit>
     public int IdGenre { get; set; }
     public short PublishedYear { get; set; }
     public short PageAmount { get; set; }
-    public decimal AverageRating { get; set; }
     public IFormFile? BookCover { get; set; }
 }

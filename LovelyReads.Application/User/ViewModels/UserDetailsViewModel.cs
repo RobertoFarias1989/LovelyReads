@@ -1,4 +1,4 @@
-﻿using LovelyReads.Application.BookReview.ViewModels;
+﻿using LovelyReads.Application.UserBookReview.ViewModels;
 
 namespace LovelyReads.Application.User.ViewModels;
 
@@ -11,7 +11,7 @@ public class UserDetailsViewModel
         string? country,
         string? cPFNumber,
         string? emailAddress,
-        string? fullName, string? passwordValue, List<BookReviewViewModel> bookReviews)
+        string? fullName, string? passwordValue, List<UserBookReviewViewModel> bookReviews)
     {
         Street = street;
         City = city;
@@ -34,5 +34,5 @@ public class UserDetailsViewModel
     public string? EmailAddress { get; private set; }
     public string? FullName { get; private set; }
     public string? PasswordValue { get; private set; }
-    public List<BookReviewViewModel> BookReviews { get; private set; }
+    public List<UserBookReviewViewModel> BookReviews { get; private set; }
 }

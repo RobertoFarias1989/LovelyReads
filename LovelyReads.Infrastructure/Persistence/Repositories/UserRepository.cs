@@ -24,8 +24,7 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories
         public async Task<User?> GetByIdAsync(int id)
         {
             return await _dbContext
-                .Users
-                .AsNoTracking()
+                .Users  
                 .SingleOrDefaultAsync(u => u.Id == id);
         }
 
@@ -33,7 +32,6 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories
         {
             return await _dbContext
                 .Users
-                .AsNoTracking()
                 .Include(u => u.BookReviews)
                 .SingleOrDefaultAsync(u => u.Id == id);
         }
@@ -43,11 +41,5 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories
             await _dbContext.Users.AddAsync(user);
         }
 
-      
-        public void UpdateAsync(User user)
-        {
-            //_dbContext.Entry(user).State = EntityState.Modified;
-            _dbContext.Users.Update(user);
-        }
     }
 }

@@ -8,6 +8,5 @@ public interface IUserBookReviewRepository
     Task<UserBookReview?> GetByIdAsync(int id);
     Task<UserBookReview?> GetDetailsByIdAsync(int id);
     Task AddAsync(UserBookReview  userBookReview);
-    void UpdateAsync(UserBookReview  userBookReview);
-    //Task UpdateAsync(BookReview bookReview);
+
 }

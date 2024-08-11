@@ -43,10 +43,7 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
                 request.Publisher!,
                 request.IdGenre,
                 request.PublishedYear,
-                request.PageAmount,
-                request.AverageRating);
-
-            _unitOfWork.BookRepository.UpdateAsync(book);
+                request.PageAmount);   
 
             await _unitOfWork.CompleteAsync();
         }
