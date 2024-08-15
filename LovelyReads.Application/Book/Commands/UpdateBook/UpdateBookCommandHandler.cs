@@ -1,10 +1,12 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.Book.Commands.UpdateBook;
 
-public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
+public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +15,7 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
     {
         var book = await _unitOfWork.BookRepository.GetByIdAsync(request.Id);
 
@@ -49,9 +51,10 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Unit>
         }
         else
         {
-            throw new Exception("The book was not found or it's inactived.");
+            return Result.Fail(BookErrors.NotFound);
+            
         }
 
-        return Unit.Value;
+        return Result.Ok();
     }
 }

@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Genre.Commands.DeleteGenre;
 
-public class DeleteGenreCommandHandler : IRequestHandler<DeleteGenreCommand, Unit>
+public class DeleteGenreCommandHandler : IRequestHandler<DeleteGenreCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ public class DeleteGenreCommandHandler : IRequestHandler<DeleteGenreCommand, Uni
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(DeleteGenreCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(DeleteGenreCommand request, CancellationToken cancellationToken)
     {
         var genre = await _unitOfWork.GenreRepository.GetByIdAsync(request.Id);
 
@@ -24,10 +26,10 @@ public class DeleteGenreCommandHandler : IRequestHandler<DeleteGenreCommand, Uni
         }
         else
         {
-            throw new Exception("The genre is already inactived.");
+            return Result.Fail(GenreErrors.NotFound);            
         }
 
-        return Unit.Value;
+        return Result.Ok();
 
     }
 }

@@ -1,11 +1,13 @@
 ﻿using LovelyReads.Application.Author.ViewModels;
 using LovelyReads.Application.Book.ViewModels;
+using LovelyReads.Core.Errors;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Author.Queries.GetAuthorById;
 
-public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, AuthorDetailsViewModel>
+public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Result<AuthorDetailsViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,14 +16,14 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Aut
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<AuthorDetailsViewModel> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<AuthorDetailsViewModel>> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
         AuthorDetailsViewModel authorDetailsViewModel;
 
-        if(author == null)
-            throw new Exception($"The author with id:{request.Id} was not found.");
+        if (author == null)
+            return Result.Fail<AuthorDetailsViewModel>(AuthorErrors.NotFound);      
 
 
         if (author.Books != null)
@@ -55,6 +57,6 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Aut
               new List<BookViewModel>());
 
 
-        return authorDetailsViewModel;
+        return Result.Ok(authorDetailsViewModel);
     }
 }

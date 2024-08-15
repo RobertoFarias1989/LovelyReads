@@ -1,10 +1,12 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.User.Commands.UpdateUser;
 
-public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
+public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +15,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _unitOfWork.UserRepository.GetByIdAsync(request.Id);
 
@@ -30,9 +32,9 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
         }
         else
         {
-            throw new Exception("The user was not found or it's already inactived.");
+            return Result.Fail(UserErrors.NotFound);            
         }
 
-        return Unit.Value;
+        return Result.Ok();
     }
 }

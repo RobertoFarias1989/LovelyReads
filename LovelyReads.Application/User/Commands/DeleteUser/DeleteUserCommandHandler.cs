@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.User.Commands.DeleteUser;
 
-public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Unit>
+public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Unit>
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _unitOfWork.UserRepository.GetByIdAsync(request.Id);
 
@@ -25,9 +27,9 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Unit>
         }
         else
         {
-            throw new Exception("The user was not found or it's already inactived.");
+            return Result.Fail(UserErrors.NotFound);            
         }
 
-        return Unit.Value;
+        return Result.Ok();
     }
 }
