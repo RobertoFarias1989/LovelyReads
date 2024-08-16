@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace LovelyReads.Application.Book.Commands.CreateBook
 {
-    public class CreateBookCommand : IRequest<int>
+    public class CreateBookCommand : IRequest<Result<int>>
     {  
         public string? Title { get;  set; }
         public string? Description { get;  set; }
