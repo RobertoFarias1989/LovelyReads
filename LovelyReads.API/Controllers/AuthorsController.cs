@@ -47,9 +47,9 @@ namespace LovelyReads.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] CreateAuthorCommand command)
         {
-            var id = await _mediator.Send(command);
+            var result = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = id }, command);
+            return CreatedAtAction(nameof(GetById), new { id = result.Value }, command);
         }
 
         [HttpPut("{id}")]
