@@ -3,6 +3,7 @@ using LovelyReads.Application.User.Commands.DeleteUser;
 using LovelyReads.Application.User.Commands.UpdateUser;
 using LovelyReads.Application.User.Queries.GetAllUsers;
 using LovelyReads.Application.User.Queries.GetUserById;
+using LovelyReads.Core.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,14 +36,12 @@ namespace LovelyReads.API.Controllers
         {
             var getUserByIdQuery = new GetUserByIdQuery(id);
 
-            var user = await _mediator.Send(getUserByIdQuery);
+            var result = await _mediator.Send(getUserByIdQuery);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
+            if (!result.Success)
+                return NotFound(result.Errors);
 
-            return Ok(user);
+            return Ok(result.Value);
 
         }
 
@@ -57,7 +56,10 @@ namespace LovelyReads.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }
@@ -67,7 +69,10 @@ namespace LovelyReads.API.Controllers
         {
             var command = new DeleteUserCommand(id);
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }

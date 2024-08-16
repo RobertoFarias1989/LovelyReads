@@ -1,4 +1,7 @@
-﻿namespace LovelyReads.Core.Entities;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Results;
+
+namespace LovelyReads.Core.Entities;
 
 public class UserBook : BaseEntity
 {
@@ -37,11 +40,16 @@ public class UserBook : BaseEntity
         UpdatedAt = DateTime.Now;
     }
 
-    public void FinishRead()
+    public Result FinishRead()
     {
+        if (PageAmountReaded == 0)
+            return Result.Fail(UserBookErrors.PageAmountReadedCannotBeZero);
+
         FinishReadAt = DateTime.Now;
 
         UpdatedAt = DateTime.Now;
+
+        return Result.Ok();
     }
 
 }

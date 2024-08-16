@@ -1,11 +1,13 @@
 ﻿using LovelyReads.Application.Book.ViewModels;
 using LovelyReads.Application.UserBook.ViewModels;
+using LovelyReads.Core.Errors;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Book.Queries.GetBookById;
 
-public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDetailsViewModel>
+public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Result<BookDetailsViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,14 +16,14 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<BookDetailsViewModel> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<BookDetailsViewModel>> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
     {
         var book = await _unitOfWork.BookRepository.GetDetailsByIdAsync(request.Id);
         BookDetailsViewModel bookDetailsViewModel;
 
 
-        if (book == null) 
-            throw new Exception($"The book  with id:{request.Id} was not found.");
+        if (book == null)
+            return Result.Fail<BookDetailsViewModel>(BookErrors.NotFound);       
 
         if (book.UserBooks != null)
         {
@@ -65,7 +67,7 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDet
                  book.BookCover,
                  new List<UserBookViewModel>());
 
-        return bookDetailsViewModel;
+        return Result.Ok(bookDetailsViewModel);
 
     }
 }

@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.UserBookReview.Commands.UpdateBookReview;
 
-public class UpdateUserBookReviewCommandHandler : IRequestHandler<UpdateUserBookReviewCommand, Unit>
+public class UpdateUserBookReviewCommandHandler : IRequestHandler<UpdateUserBookReviewCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ public class UpdateUserBookReviewCommandHandler : IRequestHandler<UpdateUserBook
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(UpdateUserBookReviewCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateUserBookReviewCommand request, CancellationToken cancellationToken)
     {
         var bookReview = await _unitOfWork.UserBookReviewRepository.GetByIdAsync(request.Id);
 
@@ -26,9 +28,9 @@ public class UpdateUserBookReviewCommandHandler : IRequestHandler<UpdateUserBook
         }
         else
         {
-            throw new Exception("The UserBookReview was not found or it's already inactived.");
+            return Result.Fail(UserBookReviewErrors.NotFound);           
         }
 
-        return Unit.Value;
+        return Result.Ok();
     }
 }

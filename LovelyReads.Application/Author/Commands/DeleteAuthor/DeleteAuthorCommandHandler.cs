@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Author.Commands.DeleteAuthor;
 
-public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, Unit>
+public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, U
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
@@ -25,10 +27,10 @@ public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, U
         }
         else
         {
-            throw new Exception("The author was not found or it's already inatived.");
+            return Result.Fail(AuthorErrors.NotFound);           
         }
 
-        return Unit.Value;
+        return Result.Ok();
 
     }
 }

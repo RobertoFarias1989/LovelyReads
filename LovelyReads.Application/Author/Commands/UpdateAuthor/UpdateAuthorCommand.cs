@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace LovelyReads.Application.Author.Commands.UpdateAuthor;
 
-public class UpdateAuthorCommand : IRequest<Unit>
+public class UpdateAuthorCommand : IRequest<Result>
 {
     public int Id { get;  set; }
     public string? Born { get; set; }

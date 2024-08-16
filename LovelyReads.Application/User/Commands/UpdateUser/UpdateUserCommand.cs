@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 
 namespace LovelyReads.Application.User.Commands.UpdateUser;
 
-public class UpdateUserCommand : IRequest<Unit>
+public class UpdateUserCommand : IRequest<Result>
 {
     public int Id { get;  set; }
     public string? Street { get; set; }

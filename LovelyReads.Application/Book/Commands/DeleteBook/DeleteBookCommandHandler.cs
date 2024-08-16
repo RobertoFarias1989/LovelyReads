@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Book.Commands.DeleteBook
 {
-    public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Unit>
+    public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ namespace LovelyReads.Application.Book.Commands.DeleteBook
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
             var book = await _unitOfWork.BookRepository.GetByIdAsync(request.Id);
 
@@ -24,10 +26,10 @@ namespace LovelyReads.Application.Book.Commands.DeleteBook
             }
             else
             {
-                throw new Exception("The book was not found or it's already inatived.");
+                return Result.Fail(BookErrors.NotFound);                
             }
 
-            return Unit.Value;
+            return Result.Ok();
         }
     }
 }

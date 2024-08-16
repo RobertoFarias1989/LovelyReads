@@ -1,11 +1,12 @@
 ﻿using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.Author.Commands.CreateAuthor;
 
-public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, int>
+public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, Result<int>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,7 +15,7 @@ public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, i
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<int> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
+    public async Task<Result<int>> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
     {
         //contruir o objeto que irá ser salvo no banco
         //você vai receber os parâmetros e passar para a entidade;
@@ -36,7 +37,7 @@ public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, i
 
         await _unitOfWork.CompleteAsync();
 
-        return author.Id;
+        return Result.Ok(author.Id);
 
     }
 }
