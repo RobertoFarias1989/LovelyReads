@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 
 namespace LovelyReads.Application.Book.Commands.DeleteBook
 {
-    public class DeleteBookCommand : IRequest<Unit>
+    public class DeleteBookCommand : IRequest<Result>
     {
         public DeleteBookCommand(int id)
         {

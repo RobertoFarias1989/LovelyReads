@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.UserBook.Commads.FinishUserBook;
 
-public class FinishUserBookCommandHandler : IRequestHandler<FinishUserBookCommand, Unit>
+public class FinishUserBookCommandHandler : IRequestHandler<FinishUserBookCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ public class FinishUserBookCommandHandler : IRequestHandler<FinishUserBookComman
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(FinishUserBookCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(FinishUserBookCommand request, CancellationToken cancellationToken)
     {
         var userBook = await _unitOfWork.UserBookRepository.GetByIdAsync(request.Id);
 
@@ -24,9 +26,9 @@ public class FinishUserBookCommandHandler : IRequestHandler<FinishUserBookComman
         }
         else
         {
-            throw new Exception("The UserBook was not found or it's already deleted.");
+            return Result.Fail(UserBookErrors.NotFound);            
         }
 
-        return Unit.Value;
+        return Result.Ok();
     }
 }

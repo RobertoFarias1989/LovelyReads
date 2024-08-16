@@ -1,11 +1,13 @@
 ﻿using LovelyReads.Core.Entities;
+using LovelyReads.Core.Errors;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.Author.Commands.UpdateAuthor;
 
-public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, Unit>
+public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,7 +16,7 @@ public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, U
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
     {
         var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
 
@@ -46,9 +48,9 @@ public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, U
         }
         else
         {
-            throw new Exception("The author is not found.");
+            return Result.Fail(AuthorErrors.NotFound);      
         }
 
-        return Unit.Value;
+        return Result.Ok();
     }
 }

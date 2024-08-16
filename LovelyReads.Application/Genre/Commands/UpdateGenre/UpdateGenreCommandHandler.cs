@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Genre.Commands.UpdateGenre;
 
-public class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, Unit>
+public class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ public class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, Uni
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Unit> Handle(UpdateGenreCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateGenreCommand request, CancellationToken cancellationToken)
     {
         var genre = await _unitOfWork.GenreRepository.GetByIdAsync(request.Id);
 
@@ -24,9 +26,9 @@ public class UpdateGenreCommandHandler : IRequestHandler<UpdateGenreCommand, Uni
         }
         else
         {
-            throw new Exception("The genre is not found.");
+            return Result.Fail(GenreErrors.NotFound);            
         }
 
-        return Unit.Value;
+        return Result.Ok();
     }
 }

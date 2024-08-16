@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace LovelyReads.Application.Book.Commands.UpdateBook;
 
-public class UpdateBookCommand : IRequest<Unit>
+public class UpdateBookCommand : IRequest<Result>
 {
     public int Id { get; set; }
     public string? Title { get; set; }

@@ -1,9 +1,10 @@
 ﻿using LovelyReads.Application.UserBook.ViewModels;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.UserBook.Queries.GetUserBookById;
 
-public class GetUserBookByIdQuery : IRequest<UserBookDetailsViewModel>
+public class GetUserBookByIdQuery : IRequest<Result<UserBookDetailsViewModel>>
 {
     public GetUserBookByIdQuery(int id)
     {

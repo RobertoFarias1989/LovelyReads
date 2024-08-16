@@ -36,14 +36,12 @@ namespace LovelyReads.API.Controllers
         {
             var getUserBookByIdQuery = new GetUserBookByIdQuery(id);
 
-            var userBook = await _mediator.Send(getUserBookByIdQuery);
+            var result = await _mediator.Send(getUserBookByIdQuery);
 
-            if(userBook == null)
-            {
-                return NotFound();
-            }
+            if(!result.Success)
+                return NotFound(result.Errors);
 
-            return Ok(userBook);
+            return Ok(result.Value);
         }
 
         [HttpPost]
@@ -57,7 +55,10 @@ namespace LovelyReads.API.Controllers
         [HttpPut("updatepageamountreaded/{id}")]
         public async Task<IActionResult> UpdatePageAmountReaded(int id, UpdateUserBookCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }
@@ -65,7 +66,10 @@ namespace LovelyReads.API.Controllers
         [HttpPut("finishread/{id}")]
         public async Task<IActionResult> FinishRead(int id, FinishUserBookCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }
@@ -75,7 +79,10 @@ namespace LovelyReads.API.Controllers
         {
             var deleteUserBookCommand = new DeleteUserBookCommand(id);
 
-            await _mediator.Send(deleteUserBookCommand);
+            var result = await _mediator.Send(deleteUserBookCommand);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
 

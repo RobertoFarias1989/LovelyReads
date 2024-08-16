@@ -1,11 +1,13 @@
 ﻿using LovelyReads.Application.Book.ViewModels;
 using LovelyReads.Application.Genre.ViewModels;
+using LovelyReads.Core.Errors;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Genre.Queries.GetGenreById;
 
-public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, GenreDetailsViewModel>
+public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, Result<GenreDetailsViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,14 +16,14 @@ public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, Genre
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<GenreDetailsViewModel> Handle(GetGenreByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<GenreDetailsViewModel>> Handle(GetGenreByIdQuery request, CancellationToken cancellationToken)
     {
         var genre = await _unitOfWork.GenreRepository.GetByIdAsync(request.Id);
 
         GenreDetailsViewModel genreDetailsViewModel;
 
         if (genre == null)
-            throw new Exception("The genre was not found.");
+            return Result.Fail<GenreDetailsViewModel>(GenreErrors.NotFound);            
 
         if (genre.Books != null)
         {
@@ -52,6 +54,6 @@ public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, Genre
                new List<BookViewModel>());
 
 
-        return genreDetailsViewModel;
+        return Result.Ok(genreDetailsViewModel);
     }
 }

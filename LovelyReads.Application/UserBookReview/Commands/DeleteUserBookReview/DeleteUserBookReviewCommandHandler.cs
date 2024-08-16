@@ -1,9 +1,11 @@
-﻿using LovelyReads.Core.Repositories;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.UserBookReview.Commands.DeleteBookReview
 {
-    public class DeleteUserBookReviewCommandHandler : IRequestHandler<DeleteUserBookReviewCommand, Unit>
+    public class DeleteUserBookReviewCommandHandler : IRequestHandler<DeleteUserBookReviewCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -12,7 +14,7 @@ namespace LovelyReads.Application.UserBookReview.Commands.DeleteBookReview
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(DeleteUserBookReviewCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteUserBookReviewCommand request, CancellationToken cancellationToken)
         {
             var bookReview = await _unitOfWork.UserBookReviewRepository.GetByIdAsync(request.Id);
 
@@ -26,10 +28,10 @@ namespace LovelyReads.Application.UserBookReview.Commands.DeleteBookReview
             }
             else
             {
-                throw new Exception($"The UserBookReview with id: {request.Id} was not found or it's already inatived.");
+                return Result.Fail(UserBookReviewErrors.NotFound);               
             }
 
-            return Unit.Value;
+            return Result.Ok();
         }
     }
 }

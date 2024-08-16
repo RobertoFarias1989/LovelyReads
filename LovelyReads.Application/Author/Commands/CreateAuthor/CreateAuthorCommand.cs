@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 
 namespace LovelyReads.Application.Author.Commands.CreateAuthor;
 
-public class CreateAuthorCommand : IRequest<int>
+public class CreateAuthorCommand : IRequest<Result<int>>
 {
     public string? Born { get;  set; }
     public string? Died { get;  set; }

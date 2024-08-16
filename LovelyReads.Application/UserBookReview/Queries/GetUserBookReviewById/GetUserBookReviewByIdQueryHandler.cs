@@ -1,10 +1,12 @@
 ﻿using LovelyReads.Application.UserBookReview.ViewModels;
+using LovelyReads.Core.Errors;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.UserBookReview.Queries.GetBookReviewById;
 
-public class GetUserBookReviewByIdQueryHandler : IRequestHandler<GetUserBookReviewByIdQuery, UserBookReviewDetailsViewModel>
+public class GetUserBookReviewByIdQueryHandler : IRequestHandler<GetUserBookReviewByIdQuery, Result<UserBookReviewDetailsViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +15,7 @@ public class GetUserBookReviewByIdQueryHandler : IRequestHandler<GetUserBookRevi
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<UserBookReviewDetailsViewModel> Handle(GetUserBookReviewByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<UserBookReviewDetailsViewModel>> Handle(GetUserBookReviewByIdQuery request, CancellationToken cancellationToken)
     {
         var bookReview = await _unitOfWork.UserBookReviewRepository.GetDetailsByIdAsync(request.Id);
 
@@ -27,11 +29,11 @@ public class GetUserBookReviewByIdQueryHandler : IRequestHandler<GetUserBookRevi
                 bookReview.User!.Name.FullName,
                 bookReview.UserBook!.Book!.Title);
 
-            return bookReviewDetailsViewModel;
+            return Result.Ok(bookReviewDetailsViewModel);
         }
         else
         {
-            throw new Exception($"The BookReview with Id:{request.Id} was not found.");
+            return Result.Fail<UserBookReviewDetailsViewModel>(UserBookReviewErrors.NotFound);            
         }
     }
 }

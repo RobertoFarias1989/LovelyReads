@@ -3,10 +3,12 @@ using LovelyReads.Application.User.ViewModels;
 using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
 using MediatR;
+using LovelyReads.Core.Results;
+using LovelyReads.Core.Errors;
 
 namespace LovelyReads.Application.User.Queries.GetUserById;
 
-public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDetailsViewModel>
+public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Result<UserDetailsViewModel>>
 {
     private readonly IUnitOfWork? _unitOfWork;
 
@@ -15,13 +17,13 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDet
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<UserDetailsViewModel> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<UserDetailsViewModel>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
         var user = await _unitOfWork!.UserRepository.GetDetailsByIdAsync(request.Id);
         UserDetailsViewModel userDetailsViewModel;
 
         if (user == null)
-            throw new Exception($"The user with id:{request.Id} was not found.");
+            return Result.Fail<UserDetailsViewModel>(UserErrors.NotFound);            
 
         //TODO: ver qual lista exibir se a de Review ou de UserBook
 
@@ -64,6 +66,6 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDet
                new List<UserBookReviewViewModel>());
 
 
-        return userDetailsViewModel;
+        return Result.Ok(userDetailsViewModel);
     }
 }

@@ -35,14 +35,12 @@ namespace LovelyReads.API.Controllers
         {
             var gGetBookByIdQuery = new GetBookByIdQuery(id);
 
-            var book = await _mediator.Send(gGetBookByIdQuery);
+            var result = await _mediator.Send(gGetBookByIdQuery);
 
-            if(book == null)
-            {
-                return NotFound();
-            }
+            if(!result.Success) 
+                return NotFound(result.Errors);     
 
-            return Ok(book);
+            return Ok(result.Value);
         }
 
         [HttpPost]
@@ -56,7 +54,10 @@ namespace LovelyReads.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromForm] UpdateBookCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }
@@ -66,7 +67,10 @@ namespace LovelyReads.API.Controllers
         {
             var command = new DeleteBookCommand(id);
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
 
