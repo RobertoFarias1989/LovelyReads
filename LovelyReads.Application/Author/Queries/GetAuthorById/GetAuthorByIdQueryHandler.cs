@@ -44,6 +44,9 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Res
                 author.Description,
                 author.Name.FullName,
                 author.Image,
+                author.IsDeleted,
+                author.CreatedAt,
+                author.UpdatedAt,
                 books);
         }
 
@@ -54,6 +57,9 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Res
               author.Description,
               author.Name.FullName,
               author.Image,
+              author.IsDeleted,
+              author.CreatedAt,
+              author.UpdatedAt,
               new List<BookViewModel>());
 
 
