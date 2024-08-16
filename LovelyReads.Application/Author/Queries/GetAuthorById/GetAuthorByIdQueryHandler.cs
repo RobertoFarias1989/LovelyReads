@@ -18,7 +18,7 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Res
 
     public async Task<Result<AuthorDetailsViewModel>> Handle(GetAuthorByIdQuery request, CancellationToken cancellationToken)
     {
-        var author = await _unitOfWork.AuthorRepository.GetByIdAsync(request.Id);
+        var author = await _unitOfWork.AuthorRepository.GetDetailsByIdAsync(request.Id);
 
         AuthorDetailsViewModel authorDetailsViewModel;
 
@@ -26,7 +26,7 @@ public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, Res
             return Result.Fail<AuthorDetailsViewModel>(AuthorErrors.NotFound);      
 
 
-        if (author.Books != null)
+        if (author.Books!.Count > 0)
         {
             var books = author.Books
                 .Where(b => b.IdAuthor == author.Id)
