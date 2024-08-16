@@ -35,14 +35,13 @@ namespace LovelyReads.API.Controllers
         {
             var getAuthorByIdQuery = new GetAuthorByIdQuery(id);
 
-            var author = await _mediator.Send(getAuthorByIdQuery);
+            var result = await _mediator.Send(getAuthorByIdQuery);
 
-            if (author == null) 
-            {
-                return NotFound();
-            }
+            if (!result.Success)     
+                return NotFound(result.Errors);
+      
 
-            return Ok(author);
+            return Ok(result.Value);
         }
 
         [HttpPost]
@@ -56,7 +55,10 @@ namespace LovelyReads.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromForm] UpdateAuthorCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }
@@ -66,7 +68,10 @@ namespace LovelyReads.API.Controllers
         {
             var command = new DeleteAuthorCommand(id);
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }

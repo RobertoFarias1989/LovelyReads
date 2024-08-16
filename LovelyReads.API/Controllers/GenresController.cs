@@ -3,6 +3,7 @@ using LovelyReads.Application.Genre.Commands.DeleteGenre;
 using LovelyReads.Application.Genre.Commands.UpdateGenre;
 using LovelyReads.Application.Genre.Queries.GetAllGenre;
 using LovelyReads.Application.Genre.Queries.GetGenreById;
+using LovelyReads.Core.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,14 +36,12 @@ namespace LovelyReads.API.Controllers
         {
             var getGenreByIdQuery = new GetGenreByIdQuery(id);
 
-            var genre = await _mediator.Send(getGenreByIdQuery);
+            var result = await _mediator.Send(getGenreByIdQuery);
 
-            if (genre == null) 
-            { 
-                return NotFound();
-            }
+            if (!result.Success) 
+                return NotFound(result.Errors);      
 
-            return Ok(genre);
+            return Ok(result.Value);
         }
 
         [HttpPost]
@@ -56,7 +55,10 @@ namespace LovelyReads.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, UpdateGenreCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }
@@ -66,7 +68,10 @@ namespace LovelyReads.API.Controllers
         {
             var command = new DeleteGenreCommand(id);
 
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
 
             return NoContent();
         }

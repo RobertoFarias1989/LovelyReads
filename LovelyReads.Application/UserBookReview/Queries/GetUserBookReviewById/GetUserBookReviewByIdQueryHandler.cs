@@ -6,7 +6,6 @@ using MediatR;
 
 namespace LovelyReads.Application.UserBookReview.Queries.GetBookReviewById;
 
-public class GetUserBookReviewByIdQuery : IRequest<Result<UserBookReviewDetailsViewModel>>
 public class GetUserBookReviewByIdQueryHandler : IRequestHandler<GetUserBookReviewByIdQuery, Result<UserBookReviewDetailsViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
