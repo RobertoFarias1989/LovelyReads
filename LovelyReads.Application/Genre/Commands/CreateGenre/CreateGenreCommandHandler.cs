@@ -1,10 +1,11 @@
 ﻿using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.Genre.Commands.CreateGenre;
 
-public class CreateGenreCommandHandler : IRequestHandler<CreateGenreCommand, int>
+public class CreateGenreCommandHandler : IRequestHandler<CreateGenreCommand, Result<int>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +14,7 @@ public class CreateGenreCommandHandler : IRequestHandler<CreateGenreCommand, int
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<int> Handle(CreateGenreCommand request, CancellationToken cancellationToken)
+    public async Task<Result<int>> Handle(CreateGenreCommand request, CancellationToken cancellationToken)
     {
         var genre = new Core.Entities.Genre(request.Description!);
 
@@ -21,6 +22,6 @@ public class CreateGenreCommandHandler : IRequestHandler<CreateGenreCommand, int
 
         await _unitOfWork.CompleteAsync();
 
-        return genre.Id;
+        return Result.Ok(genre.Id);
     }
 }
