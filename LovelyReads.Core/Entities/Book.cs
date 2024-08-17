@@ -78,6 +78,8 @@ public class Book : BaseEntity
         BookCover = path;
     }
 
+    //TODO: criar um método que permita deletar somente os livros que não estão com a FinishReadAt null
+
     //TODO : criar método para atualizar a AverageRating a cada avalição da UserBook
 
 }
