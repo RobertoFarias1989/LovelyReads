@@ -1,4 +1,7 @@
-﻿namespace LovelyReads.Core.Entities;
+﻿using LovelyReads.Core.Errors;
+using LovelyReads.Core.Results;
+
+namespace LovelyReads.Core.Entities;
 
 public class UserBookReview : BaseEntity
 {
@@ -32,4 +35,5 @@ public class UserBookReview : BaseEntity
 
         UpdatedAt = DateTime.Now;
     }
+    
 }
