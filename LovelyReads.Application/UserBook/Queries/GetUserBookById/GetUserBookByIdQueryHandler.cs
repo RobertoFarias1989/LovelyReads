@@ -25,7 +25,7 @@ public class GetUserBookByIdQueryHandler : IRequestHandler<GetUserBookByIdQuery,
             return Result.Fail<UserBookDetailsViewModel>(UserBookErrors.NotFound);
             
 
-        if(userBook.Reviews != null)
+        if(userBook.Reviews!.Count > 0)
         {
             var reviews = userBook.Reviews
                .Where(br => br.IdUser == userBook.Id)
@@ -40,22 +40,32 @@ public class GetUserBookByIdQueryHandler : IRequestHandler<GetUserBookByIdQuery,
             userBookDetailsViewModel = new UserBookDetailsViewModel(
                 userBook.Id,
                 userBook.IdUser,
+                userBook.User!.Name.FullName,
                 userBook.IdBook,
+                userBook.Book!.Title,
                 userBook.StartToReadAt,
                 userBook.FinishReadAt,
                 userBook.PageAmountReaded,
                 userBook.PageAmountToFinishRead,
+                userBook.IsDeleted,
+                userBook.CreatedAt,
+                userBook.UpdatedAt,
                 reviews);
         }
 
         userBookDetailsViewModel = new UserBookDetailsViewModel(
                userBook.Id,
                userBook.IdUser,
+               userBook.User!.Name.FullName,
                userBook.IdBook,
+               userBook.Book!.Title,
                userBook.StartToReadAt,
                userBook.FinishReadAt,
                userBook.PageAmountReaded,
                userBook.PageAmountToFinishRead,
+               userBook.IsDeleted,
+               userBook.CreatedAt,
+               userBook.UpdatedAt,
                new List<UserBookReviewViewModel>());
 
         return Result.Ok(userBookDetailsViewModel);

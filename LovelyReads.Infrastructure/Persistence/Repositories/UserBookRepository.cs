@@ -28,6 +28,8 @@ public class UserBookRepository : IUserBookRepository
         return await _dbContext
             .UserBooks
             .Include(ub => ub.Reviews)
+            .Include(ub => ub.User)
+            .Include(ub => ub.Book)
             .SingleOrDefaultAsync(ub => ub.Id == id);
     }
     public async Task AddAsync(UserBook userBook)
