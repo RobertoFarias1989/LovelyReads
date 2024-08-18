@@ -7,4 +7,5 @@ public static class UserBookReviewErrors
 
     public static readonly Error AlreadyDeleted = new(
             "UserBookReview.AlreadyDeleted", "The UserBookReview is already deleted.");
+    
 }

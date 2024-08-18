@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 
 namespace LovelyReads.Application.UserBookReview.Commands.CreateBookReview;
 
-public class CreateUserBookReviewCommand : IRequest<int>
+public class CreateUserBookReviewCommand : IRequest<Result<int>>
 {    
     public byte Rating { get;  set; }
     public string? Comment { get;  set; }
