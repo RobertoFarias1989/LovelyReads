@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using LovelyReads.Core.Results;
+using MediatR;
 
 namespace LovelyReads.Application.User.Commands.CreateUser;
 
-public class CreateUserCommand : IRequest<int>
+public class CreateUserCommand : IRequest<Result<int>>
 {
     public string? Street { get;  set; }
     public string? City { get; set; }
