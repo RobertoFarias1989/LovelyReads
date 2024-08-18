@@ -39,5 +39,7 @@ public class User : BaseEntity
         Email = email;
         Name = name;
         Password = password;
+
+        UpdatedAt = DateTime.Now;
     }
 }

@@ -27,7 +27,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Result<
 
         //TODO: ver qual lista exibir se a de Review ou de UserBook
 
-        if (user.BookReviews != null)
+        if (user.BookReviews.Count > 0)
         {
             var bookReviews = user.BookReviews
                 .Where(br => br.IdUser == user.Id)
@@ -49,6 +49,9 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Result<
                 user.Email.EmailAddress,
                 user.Name.FullName,
                 user.Password.PasswordValue,
+                user.IsDeleted,
+                user.CreatedAt,
+                user.UpdatedAt,
                 bookReviews);
 
         }
@@ -63,6 +66,9 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Result<
                user.Email.EmailAddress,
                user.Name.FullName,
                user.Password.PasswordValue,
+               user.IsDeleted,
+               user.CreatedAt,
+               user.UpdatedAt,
                new List<UserBookReviewViewModel>());
 
 
