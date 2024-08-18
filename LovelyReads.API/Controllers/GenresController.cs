@@ -3,15 +3,16 @@ using LovelyReads.Application.Genre.Commands.DeleteGenre;
 using LovelyReads.Application.Genre.Commands.UpdateGenre;
 using LovelyReads.Application.Genre.Queries.GetAllGenre;
 using LovelyReads.Application.Genre.Queries.GetGenreById;
-using LovelyReads.Core.Results;
+using LovelyReads.Application.Genre.ViewModels;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LovelyReads.API.Controllers
 {
     [Route("api/genres")]
     [ApiController]
+    [Produces("application/json")]
     public class GenresController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,6 +23,8 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Obtém a lista de Genres")]
+        [ProducesResponseType(typeof(List<GenreViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
             var getAllGenreQuery = new GetAllGenresQuery();
@@ -32,6 +35,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Obtém um Genre")]
+        [ProducesResponseType(typeof(GenreDetailsViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {
             var getGenreByIdQuery = new GetGenreByIdQuery(id);
@@ -45,6 +51,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Adiciona um Genre")]
+        [ProducesResponseType(typeof(CreateGenreCommand), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Post(CreateGenreCommand command)
         {
             var result = await _mediator.Send(command);
@@ -53,6 +62,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Atualiza um Genre")]
+        [ProducesResponseType(typeof(UpdateGenreCommand), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Put(int id, UpdateGenreCommand command)
         {
             var result = await _mediator.Send(command);
@@ -64,6 +76,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Deleta um Genre")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteGenreCommand(id);
