@@ -1,10 +1,11 @@
 ﻿using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using MediatR;
 
 namespace LovelyReads.Application.UserBook.Commads.CreateUserBook;
 
-public class CreateUserBookCommandHandler : IRequestHandler<CreateUserBookCommand, int>
+public class CreateUserBookCommandHandler : IRequestHandler<CreateUserBookCommand, Result<int>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,7 +14,7 @@ public class CreateUserBookCommandHandler : IRequestHandler<CreateUserBookComman
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<int> Handle(CreateUserBookCommand request, CancellationToken cancellationToken)
+    public async Task<Result<int>> Handle(CreateUserBookCommand request, CancellationToken cancellationToken)
     {
 
         var book = await _unitOfWork.BookRepository.GetByIdAsync(request.IdBook);
@@ -24,7 +25,7 @@ public class CreateUserBookCommandHandler : IRequestHandler<CreateUserBookComman
 
         await _unitOfWork.CompleteAsync();
 
-        return userBook.Id;
+        return Result.Ok(userBook.Id);
 
     }
 }
