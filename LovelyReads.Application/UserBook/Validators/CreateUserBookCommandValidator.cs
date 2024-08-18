@@ -19,11 +19,11 @@ namespace LovelyReads.Application.UserBook.Validators
                 .NotNull()
                 .WithMessage("IdUser's field mustn't be null.");
 
-            RuleFor(u => u.PageAmountToFinishRead)
-                .NotEmpty()
-                .WithMessage("PageAmountToFinishRead's field mustn't be empty.")
-                .NotNull()
-                .WithMessage("PageAmountToFinishRead's field mustn't be null.");
+            //RuleFor(u => u.PageAmountToFinishRead)
+            //    .NotEmpty()
+            //    .WithMessage("PageAmountToFinishRead's field mustn't be empty.")
+            //    .NotNull()
+            //    .WithMessage("PageAmountToFinishRead's field mustn't be null.");
         }
     }
 }

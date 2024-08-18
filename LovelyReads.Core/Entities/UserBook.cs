@@ -35,7 +35,8 @@ public class UserBook : BaseEntity
     {
         PageAmountReaded++;
 
-        PageAmountToFinishRead--;
+        //TODO: criar uma propriedade para guardar o total de páginas ou uma pra ir sendo reduzida conforme a PageAmountReaded vai sendo incrementada? 
+        //PageAmountToFinishRead--;
 
         UpdatedAt = DateTime.Now;
     }

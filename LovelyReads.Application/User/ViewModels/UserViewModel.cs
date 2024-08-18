@@ -2,13 +2,13 @@
 
 public class UserViewModel
 {
-    public UserViewModel(string? street,
-        string? city,
-        string? state,
-        string? postalCode,
-        string? country,
-        string? cPFNumber, string? emailAddress, string? fullName, string? passwordValue)
+    public UserViewModel(int id,
+        string street,
+        string city,
+        string state,
+        string postalCode, string country, string cPFNumber, string emailAddress, string fullName, string passwordValue)
     {
+        Id = id;
         Street = street;
         City = city;
         State = state;
@@ -20,13 +20,14 @@ public class UserViewModel
         PasswordValue = passwordValue;
     }
 
-    public string? Street { get; private set; }
-    public string? City { get; private set; }
-    public string? State { get; private set; }
-    public string? PostalCode { get; private set; }
-    public string? Country { get; private set; }
-    public string? CPFNumber { get; private set; }
-    public string? EmailAddress { get; private set; }
-    public string? FullName { get; private set; }
-    public string? PasswordValue { get; private set; }
+    public int Id { get; private set; }
+    public string Street { get; private set; }
+    public string City { get; private set; }
+    public string State { get; private set; }
+    public string PostalCode { get; private set; }
+    public string Country { get; private set; }
+    public string CPFNumber { get; private set; }
+    public string EmailAddress { get; private set; }
+    public string FullName { get; private set; }
+    public string PasswordValue { get; private set; }
 }

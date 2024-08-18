@@ -20,6 +20,7 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<Us
         var userViewModel = users
             .Where(entity => entity.IsDeleted == false)
             .Select(u => new UserViewModel(
+                u.Id,
                 u.Address.Street,
                 u.Address.City,
                 u.Address.State,
