@@ -34,6 +34,7 @@ public class UserBookReviewRepository : IUserBookReviewRepository
             .UserBookReviews
             .Include(br => br.User)
             .Include(br => br.UserBook)
+            .Include (br => br.UserBook!.Book)
             .SingleOrDefaultAsync(br => br.Id == id);
 
     }

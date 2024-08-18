@@ -10,4 +10,7 @@ public static class UserBookErrors
 
     public static readonly Error PageAmountReadedCannotBeZero = new(
             "UserBook.PageAmountReadedCannotBeZero", "The PageAmountReaded cannot be zero.");
+
+    public static readonly Error FinishReadAtCantBeNull = new(
+            "UserBook.FinishReadAtCantBeNull", "The FinishReadAt cannot be null.");
 }

@@ -53,4 +53,12 @@ public class UserBook : BaseEntity
         return Result.Ok();
     }
 
+    public Result CheckFinishReadDate(DateTime? finishReadAt)
+    {
+        if (finishReadAt == null)
+            return Result.Fail(UserBookErrors.FinishReadAtCantBeNull);
+
+        return Result.Ok();
+    }
+
 }

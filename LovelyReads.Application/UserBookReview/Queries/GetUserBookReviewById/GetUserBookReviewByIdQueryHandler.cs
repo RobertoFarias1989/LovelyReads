@@ -27,7 +27,10 @@ public class GetUserBookReviewByIdQueryHandler : IRequestHandler<GetUserBookRevi
                 bookReview.IdUser,
                 bookReview.IdUserBook,
                 bookReview.User!.Name.FullName,
-                bookReview.UserBook!.Book!.Title);
+                bookReview.UserBook!.Book!.Title,
+                bookReview.IsDeleted,
+                bookReview.CreatedAt,
+                bookReview.UpdatedAt);
 
             return Result.Ok(bookReviewDetailsViewModel);
         }
