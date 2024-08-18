@@ -3,15 +3,16 @@ using LovelyReads.Application.User.Commands.DeleteUser;
 using LovelyReads.Application.User.Commands.UpdateUser;
 using LovelyReads.Application.User.Queries.GetAllUsers;
 using LovelyReads.Application.User.Queries.GetUserById;
-using LovelyReads.Core.Results;
+using LovelyReads.Application.User.ViewModels;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LovelyReads.API.Controllers
 {
     [Route("api/users")]
     [ApiController]
+    [Produces("application/json")]
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,6 +23,8 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Obtém a lista de Users")]
+        [ProducesResponseType(typeof(List<UserViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
             var getAllUsersQuery = new GetAllUsersQuery();
@@ -32,6 +35,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Obtém um User")]
+        [ProducesResponseType(typeof(UserDetailsViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {
             var getUserByIdQuery = new GetUserByIdQuery(id);
@@ -46,6 +52,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Adiciona um User")]
+        [ProducesResponseType(typeof(CreateUserCommand), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Post(CreateUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -54,6 +63,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Atualiza um User")]
+        [ProducesResponseType(typeof(UpdateUserCommand), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -65,6 +77,9 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Deleta um User")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteUserCommand(id);
