@@ -71,12 +71,18 @@ public class Book : BaseEntity
         IdGenre = idGenre;
         PublishedYear = publishedYear;
         PageAmount = pageAmount;
+
+        UpdatedAt = DateTime.Now;
     }
 
     public void UpdateBookCover(string path)
     {
         BookCover = path;
+
+        UpdatedAt = DateTime.Now;
     }
+
+    //TODO: criar um método que permita deletar somente os livros que não estão com a FinishReadAt null
 
     //TODO : criar método para atualizar a AverageRating a cada avalição da UserBook
 

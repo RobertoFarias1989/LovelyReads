@@ -19,13 +19,14 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Result<
     public async Task<Result<BookDetailsViewModel>> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
     {
         var book = await _unitOfWork.BookRepository.GetDetailsByIdAsync(request.Id);
+
         BookDetailsViewModel bookDetailsViewModel;
 
 
         if (book == null)
             return Result.Fail<BookDetailsViewModel>(BookErrors.NotFound);       
 
-        if (book.UserBooks != null)
+        if (book.UserBooks.Count > 0)
         {
             var userBookReviewsModel = book.UserBooks!
            .Where(br => br.IdBook == request.Id)
@@ -48,6 +49,9 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Result<
                book.PageAmount,
                book.AverageRating,
                book.BookCover,
+               book.IsDeleted,
+               book.CreatedAt,
+               book.UpdatedAt,
                userBookReviewsModel);
         }
 
@@ -65,6 +69,9 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Result<
                  book.PageAmount,
                  book.AverageRating,
                  book.BookCover,
+                 book.IsDeleted,
+                 book.CreatedAt,
+                 book.UpdatedAt,
                  new List<UserBookViewModel>());
 
         return Result.Ok(bookDetailsViewModel);
