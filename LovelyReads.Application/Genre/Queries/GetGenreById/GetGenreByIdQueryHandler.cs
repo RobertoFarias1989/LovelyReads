@@ -18,14 +18,14 @@ public class GetGenreByIdQueryHandler : IRequestHandler<GetGenreByIdQuery, Resul
 
     public async Task<Result<GenreDetailsViewModel>> Handle(GetGenreByIdQuery request, CancellationToken cancellationToken)
     {
-        var genre = await _unitOfWork.GenreRepository.GetByIdAsync(request.Id);
+        var genre = await _unitOfWork.GenreRepository.GetDetailsByIdAsync(request.Id);
 
         GenreDetailsViewModel genreDetailsViewModel;
 
         if (genre == null)
             return Result.Fail<GenreDetailsViewModel>(GenreErrors.NotFound);            
 
-        if (genre.Books != null)
+        if (genre.Books.Count > 0)
         {
              var books = genre.Books
                 .Where(b => b.IdGenre == genre.Id)
