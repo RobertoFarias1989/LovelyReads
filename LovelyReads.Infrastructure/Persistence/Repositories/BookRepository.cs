@@ -32,7 +32,9 @@ public class BookRepository : IBookRepository
     {
         return await _dbContext
             .Books
-            .Include(b => b.UserBooks)    
+            .Include(b => b.UserBooks)
+            .Include(b => b.Author)
+            .Include(b => b.Genre)
             .SingleOrDefaultAsync(b => b.Id == id);
     }
 

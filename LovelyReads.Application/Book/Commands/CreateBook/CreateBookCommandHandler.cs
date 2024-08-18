@@ -1,11 +1,12 @@
 ﻿using LovelyReads.Core.Entities;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Results;
 using LovelyReads.Core.ValueObjects;
 using MediatR;
 
 namespace LovelyReads.Application.Book.Commands.CreateBook
 {
-    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, int>
+    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -14,7 +15,7 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
             var bookCoverPath = Path.Combine("BookStorage", request.BookCover!.FileName);
             using Stream fileStream = new FileStream(bookCoverPath, FileMode.Create);
@@ -33,7 +34,9 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
 
             await _unitOfWork.BookRepository.AddAsync(book);
 
-            return book.Id;
+            await _unitOfWork.CompleteAsync();
+
+            return Result.Ok(book.Id);
         }
     }
 }

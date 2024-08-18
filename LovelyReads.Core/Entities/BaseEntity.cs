@@ -19,5 +19,7 @@ public abstract class BaseEntity
     public virtual void Delete()
     {
         IsDeleted = true;
+
+        UpdatedAt = DateTime.Now;
     }
 }
