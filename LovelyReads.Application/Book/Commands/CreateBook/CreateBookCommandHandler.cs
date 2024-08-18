@@ -34,6 +34,8 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
 
             await _unitOfWork.BookRepository.AddAsync(book);
 
+            await _unitOfWork.CompleteAsync();
+
             return Result.Ok(book.Id);
         }
     }

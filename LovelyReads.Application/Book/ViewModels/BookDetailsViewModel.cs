@@ -15,7 +15,9 @@ public class BookDetailsViewModel
         int idGenre,
         string genreDescription,
         short publishedYear,
-        short pageAmount, decimal averageRating, string bookCover, List<UserBookViewModel> userBookReviewsModel)
+        short pageAmount,
+        decimal averageRating,
+        string bookCover, bool isDeleted, DateTime createdAt, DateTime? updatedAt, List<UserBookViewModel> userBookReviewsModel)
     {
         Id = id;
         Title = title;
@@ -30,6 +32,9 @@ public class BookDetailsViewModel
         PageAmount = pageAmount;
         AverageRating = averageRating;
         BookCover = bookCover;
+        IsDeleted = isDeleted;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
         UserBookReviewsModel = userBookReviewsModel;
     }
 
@@ -46,5 +51,8 @@ public class BookDetailsViewModel
     public short PageAmount { get; private set; }
     public decimal AverageRating { get; private set; }
     public string BookCover { get; private set; }
+    public bool IsDeleted { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public DateTime? UpdatedAt { get; private set; }
     public List<UserBookViewModel> UserBookReviewsModel { get; set; }
 }

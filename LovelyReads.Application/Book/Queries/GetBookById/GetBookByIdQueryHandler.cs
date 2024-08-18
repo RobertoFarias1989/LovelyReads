@@ -49,6 +49,9 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Result<
                book.PageAmount,
                book.AverageRating,
                book.BookCover,
+               book.IsDeleted,
+               book.CreatedAt,
+               book.UpdatedAt,
                userBookReviewsModel);
         }
 
@@ -66,6 +69,9 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Result<
                  book.PageAmount,
                  book.AverageRating,
                  book.BookCover,
+                 book.IsDeleted,
+                 book.CreatedAt,
+                 book.UpdatedAt,
                  new List<UserBookViewModel>());
 
         return Result.Ok(bookDetailsViewModel);
