@@ -23,7 +23,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet]
-        [SwaggerOperation(Summary = "Obtém a lista de avaliações dos livros lidos pelo usuário/UserBookReviews")]
+        [SwaggerOperation(Summary = "Obtém a lista de avaliações dos livros lidos pelo usuário")]
         [ProducesResponseType(typeof(List<UserBookReviewViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
@@ -52,7 +52,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
-        [SwaggerOperation(Summary = "Adiciona um UserBookReview/Adiciona uma avaliação a um livro")]
+        [SwaggerOperation(Summary = "Adiciona uma avaliação a um livro")]
         [ProducesResponseType(typeof(CreateUserBookReviewCommand), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Post(CreateUserBookReviewCommand command)
@@ -66,7 +66,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [SwaggerOperation(Summary = "Atualiza um UserBookReview/Atualiza uma avaliação de um livro")]
+        [SwaggerOperation(Summary = "Atualiza uma avaliação de um livro")]
         [ProducesResponseType(typeof(UpdateUserBookReviewCommand), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Put(int id, UpdateUserBookReviewCommand command)
@@ -80,7 +80,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [SwaggerOperation(Summary = "Deleta um UserBookReview/Deleta uma avaliação de um livro")]
+        [SwaggerOperation(Summary = "Deleta uma avaliação de um livro")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
