@@ -36,7 +36,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [SwaggerOperation(Summary = "Obtém um livro específico/UserBook")]
+        [SwaggerOperation(Summary = "Obtém um livro específico")]
         [ProducesResponseType(typeof(UserBookDetailsViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
@@ -52,7 +52,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
-        [SwaggerOperation(Summary = "Adiciona um UserBook/Inicia a leitura de um livro pelo usuário")]
+        [SwaggerOperation(Summary = "Inicia a leitura de um livro pelo usuário")]
         [ProducesResponseType(typeof(CreateUserBookCommand), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Post(CreateUserBookCommand command)
@@ -63,7 +63,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("updatepageamountreaded/{id}")]
-        [SwaggerOperation(Summary = "Atualiza a quantidade de páginas lidas de um UserBook/livro")]
+        [SwaggerOperation(Summary = "Atualiza a quantidade de páginas lidas de um livro")]
         [ProducesResponseType(typeof(UpdateUserBookCommand), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdatePageAmountReaded(int id, UpdateUserBookCommand command)
@@ -77,7 +77,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("finishread/{id}")]
-        [SwaggerOperation(Summary = "Encerra a leitura de um livro/UserBook")]
+        [SwaggerOperation(Summary = "Encerra a leitura de um livro")]
         [ProducesResponseType(typeof(FinishUserBookCommand), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> FinishRead(int id, FinishUserBookCommand command)
@@ -91,7 +91,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [SwaggerOperation(Summary = "Deleta logicamente um  livro/UserBook")]
+        [SwaggerOperation(Summary = "Deleta logicamente um  livro")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
