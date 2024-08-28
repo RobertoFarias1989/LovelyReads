@@ -24,6 +24,6 @@ public class GetAllUserBooksQueryHandler : IRequestHandler<GetAllUserBooksQuery,
 
         //return userBookViewModel;
 
-        return await _unitOfWork.UserBookRepository.GetAllBooksReadedAsync();
+        return await _unitOfWork.UserBookRepository.GetAllBooksReadedAsync(request.StartToReadAt, request.FinishReadAt);
     }
 }

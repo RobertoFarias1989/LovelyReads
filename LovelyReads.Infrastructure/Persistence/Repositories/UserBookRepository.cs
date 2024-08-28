@@ -24,22 +24,19 @@ public class UserBookRepository : IUserBookRepository
         return await _dbContext.UserBooks.AsNoTracking().ToListAsync();
     }
 
-    public async Task<List<UserBookDTO>> GetAllBooksReadedAsync()
+    public async Task<List<UserBookDTO>> GetAllBooksReadedAsync(DateTime? startToReadAt, DateTime? finishReadAt)
     {
         using (var sqlConnection = new SqlConnection(_connectionString))
         {
             sqlConnection.Open();
 
-            var sqlScript = "SELECT Id" +
-                ",IdUser" +
-                ",IdBook" +
-                ",StartToReadAt" +
-                ",FinishReadAt" +
-                ",PageAmountReaded" +
-                " PageAmountToFinishRead" +
-                " FROM UserBooks WHERE IsDeleted <> 1";
+            var sqlScript = "SELECT Id,IdUser,IdBook,StartToReadAt,FinishReadAt,PageAmountReaded,PageAmountToFinishRead" +
+                " FROM UserBooks" +
+                " WHERE IsDeleted <> 1" +
+                " AND (@startToReadAt IS NULL OR StartToReadAt = @startToReadAt)" +
+                " AND (@finishReadAt IS NULL OR FinishReadAt = @finishReadAt)";
 
-            var userBooks = await sqlConnection.QueryAsync<UserBookDTO>(sqlScript);
+            var userBooks = await sqlConnection.QueryAsync<UserBookDTO>(sqlScript, new { startToReadAt, finishReadAt });
 
             return userBooks.ToList();
 

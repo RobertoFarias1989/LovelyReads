@@ -2,24 +2,21 @@
 
 public class UserBookDTO
 {
-    public UserBookDTO()
-    {
-            
-    }
-    public UserBookDTO(int id,
-        int idUser,
-        int idBook,
-        DateTime startToReadAt,
-        DateTime? finishReadAt, short pageAmountReaded, short pageAmountToFinishRead)
-    {
-        Id = id;
-        IdUser = idUser;
-        IdBook = idBook;
-        StartToReadAt = startToReadAt;
-        FinishReadAt = finishReadAt;
-        PageAmountReaded = pageAmountReaded;
-        PageAmountToFinishRead = pageAmountToFinishRead;
-    }
+
+    //public UserBookDTO(int id,
+    //    int idUser,
+    //    int idBook,
+    //    DateTime startToReadAt,
+    //    DateTime? finishReadAt, short pageAmountReaded, short pageAmountToFinishRead)
+    //{
+    //    Id = id;
+    //    IdUser = idUser;
+    //    IdBook = idBook;
+    //    StartToReadAt = startToReadAt;
+    //    FinishReadAt = finishReadAt;
+    //    PageAmountReaded = pageAmountReaded;
+    //    PageAmountToFinishRead = pageAmountToFinishRead;
+    //}
 
     public int Id { get; private set; }
     public int IdUser { get; private set; }
