@@ -33,8 +33,8 @@ public class UserBookRepository : IUserBookRepository
             var sqlScript = "SELECT Id,IdUser,IdBook,StartToReadAt,FinishReadAt,PageAmountReaded,PageAmountToFinishRead" +
                 " FROM UserBooks" +
                 " WHERE IsDeleted <> 1" +
-                " AND (@startToReadAt IS NULL OR StartToReadAt = @startToReadAt)" +
-                " AND (@finishReadAt IS NULL OR FinishReadAt = @finishReadAt)";
+                " AND (@startToReadAt IS NULL OR StartToReadAt >= @startToReadAt)" +
+                " AND (@finishReadAt IS NULL OR FinishReadAt <= @finishReadAt)";
 
             var userBooks = await sqlConnection.QueryAsync<UserBookDTO>(sqlScript, new { startToReadAt, finishReadAt });
 

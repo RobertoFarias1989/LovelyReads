@@ -25,7 +25,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet]
-        [SwaggerOperation(Summary = "Obtém a lista de livros lidos ou não pelo usuário")]
+        [SwaggerOperation(Summary = "Obtém a lista de livros lidos ou não")]
         [ProducesResponseType(typeof(List<UserBookDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(DateTime? startToReadAt, DateTime? finishReadAt)
         {
