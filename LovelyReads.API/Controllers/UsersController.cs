@@ -1,16 +1,19 @@
-﻿using LovelyReads.Application.User.Commands.CreateUser;
+﻿using LovelyReads.Application.Login.Commands;
+using LovelyReads.Application.User.Commands.CreateUser;
 using LovelyReads.Application.User.Commands.DeleteUser;
 using LovelyReads.Application.User.Commands.UpdateUser;
 using LovelyReads.Application.User.Queries.GetAllUsers;
 using LovelyReads.Application.User.Queries.GetUserById;
 using LovelyReads.Application.User.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace LovelyReads.API.Controllers
 {
     [Route("api/users")]
+    [Authorize]
     [ApiController]
     [Produces("application/json")]
     public class UsersController : ControllerBase
@@ -52,6 +55,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [SwaggerOperation(Summary = "Adiciona um User")]
         [ProducesResponseType(typeof(CreateUserCommand), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -74,6 +78,21 @@ namespace LovelyReads.API.Controllers
                 return NotFound(result.Errors);
 
             return NoContent();
+        }
+
+        [HttpPut("login")]
+        [AllowAnonymous]
+        [SwaggerOperation(Summary = "Realiza o login do User")]
+        [ProducesResponseType(typeof(LoginUserCommand), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Login(LoginUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.Success)
+                return NotFound(result.Errors);
+
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]

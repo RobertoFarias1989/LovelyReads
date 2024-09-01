@@ -22,6 +22,10 @@ public class UserConfigurations : BaseEntityConfigurations<User>
             .HasForeignKey(ub => ub.IdUser)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder
+               .Property(u => u.Role)
+               .HasMaxLength(100);
+
         //Name
         builder
             .OwnsOne(u => u.Name)

@@ -5,12 +5,14 @@ using LovelyReads.Application.Book.Queries.GetAllBooks;
 using LovelyReads.Application.Book.Queries.GetBookById;
 using LovelyReads.Application.Book.ViewModels;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace LovelyReads.API.Controllers
 {
     [Route("api/books")]
+    [Authorize]
     [ApiController]
     [Produces("application/json")]
     public class BooksController : ControllerBase
@@ -23,6 +25,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Obtém a lista de Books")]
         [ProducesResponseType(typeof(List<BookViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
@@ -35,6 +38,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Obtém um Book")]
         [ProducesResponseType(typeof(BookViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -51,6 +55,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "manager")]
         [SwaggerOperation(Summary = "Adiciona um Book")]
         [ProducesResponseType(typeof(CreateBookCommand),StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -62,6 +67,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "manager")]
         [SwaggerOperation(Summary = "Atualiza um Book")]
         [ProducesResponseType(typeof(UpdateBookCommand), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -76,6 +82,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "manager")]
         [SwaggerOperation(Summary = "Deleta um Book")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
