@@ -7,12 +7,14 @@ using LovelyReads.Application.UserBook.Queries.GetUserBookById;
 using LovelyReads.Application.UserBook.ViewModels;
 using LovelyReads.Core.DTOs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace LovelyReads.API.Controllers
 {
     [Route("api/userbooks")]
+    [Authorize]
     [ApiController]
     [Produces("application/json")]
     public class UserBooksController : ControllerBase
@@ -25,6 +27,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Obtém a lista de livros lidos ou não")]
         [ProducesResponseType(typeof(List<UserBookDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(DateTime? startToReadAt, DateTime? finishReadAt)
@@ -37,6 +40,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Obtém um livro específico")]
         [ProducesResponseType(typeof(UserBookDetailsViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,6 +57,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Inicia a leitura de um livro pelo usuário")]
         [ProducesResponseType(typeof(CreateUserBookCommand), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -64,6 +69,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("updatepageamountreaded/{id}")]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Atualiza a quantidade de páginas lidas de um livro")]
         [ProducesResponseType(typeof(UpdateUserBookCommand), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -78,6 +84,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpPut("finishread/{id}")]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Encerra a leitura de um livro")]
         [ProducesResponseType(typeof(FinishUserBookCommand), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -92,6 +99,7 @@ namespace LovelyReads.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Deleta logicamente um  livro")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

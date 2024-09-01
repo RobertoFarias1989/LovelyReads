@@ -60,6 +60,7 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     EmailAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -151,7 +152,6 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     Comment = table.Column<string>(type: "nvarchar(254)", maxLength: 254, nullable: false),
                     IdUser = table.Column<int>(type: "int", nullable: false),
                     IdUserBook = table.Column<int>(type: "int", nullable: false),
-                    UserBookId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -160,10 +160,11 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_UserBookReviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserBookReviews_UserBooks_UserBookId",
-                        column: x => x.UserBookId,
+                        name: "FK_UserBookReviews_UserBooks_IdUserBook",
+                        column: x => x.IdUserBook,
                         principalTable: "UserBooks",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserBookReviews_Users_IdUser",
                         column: x => x.IdUser,
@@ -194,9 +195,9 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                 column: "IdUser");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBookReviews_UserBookId",
+                name: "IX_UserBookReviews_IdUserBook",
                 table: "UserBookReviews",
-                column: "UserBookId");
+                column: "IdUserBook");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserBooks_IdBook",

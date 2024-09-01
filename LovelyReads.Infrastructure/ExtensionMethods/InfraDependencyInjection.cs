@@ -1,4 +1,5 @@
 ﻿using LovelyReads.Core.Repositories;
+using LovelyReads.Core.Services;
 using LovelyReads.Infrastructure.Persistence;
 using LovelyReads.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,8 @@ namespace LovelyReads.Infrastructure.ExtensionMethods
         {
             services.AddRepositories()
                 .AddUnitOfWork()
-                .AddDbContext(configuration);
+                .AddDbContext(configuration)
+                .AddAuthService();
 
             return services;
             
@@ -33,7 +35,7 @@ namespace LovelyReads.Infrastructure.ExtensionMethods
 
         public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration) 
         {
-            var connectionString = configuration.GetConnectionString("LovelyReads");
+            var connectionString = configuration.GetConnectionString("LovelyReadsCs");
 
             services.AddDbContext<LovelyReadsDbContext>(options => options.UseSqlServer(connectionString));
 
@@ -47,6 +49,13 @@ namespace LovelyReads.Infrastructure.ExtensionMethods
 
             return services;
         
+        }
+
+        public static IServiceCollection AddAuthService(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthService, AuthService.AuthService>();
+
+            return services;
         }
     }
 }

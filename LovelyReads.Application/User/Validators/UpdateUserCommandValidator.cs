@@ -15,6 +15,22 @@ public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
              .MaximumLength(150)
                  .WithMessage("FullName's maximum length is around 150 characters.");
 
+        RuleFor(u => u.PasswordValue)
+                .NotEmpty()
+                    .WithMessage("PasswordValue's field mustn't be empty.")
+                .NotNull()
+                    .WithMessage("PasswordValue's field mustn't be null.")
+                .MaximumLength(100)
+                    .WithMessage("PasswordValue's maximum length is around 100 characters.");
+
+        RuleFor(u => u.Role)
+            .NotEmpty()
+                .WithMessage("Role's field mustn't be empty.")
+            .NotNull()
+                .WithMessage("Role's field mustn't be null.")
+            .MaximumLength(100)
+                .WithMessage("Role's maximum length is around 100 characters.");
+
         RuleFor(u => u.CPFNumber)
        .NotEmpty()
            .WithMessage("CPFNumber's field mustn't be empty.")
