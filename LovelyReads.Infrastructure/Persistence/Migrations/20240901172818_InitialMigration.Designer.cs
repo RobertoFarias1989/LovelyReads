@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LovelyReads.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(LovelyReadsDbContext))]
-    [Migration("20240810211351_InitialMigration")]
+    [Migration("20240901172818_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,6 +175,11 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -258,14 +263,11 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserBookId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IdUser");
 
-                    b.HasIndex("UserBookId");
+                    b.HasIndex("IdUserBook");
 
                     b.ToTable("UserBookReviews");
                 });
@@ -512,7 +514,9 @@ namespace LovelyReads.Infrastructure.Persistence.Migrations
 
                     b.HasOne("LovelyReads.Core.Entities.UserBook", "UserBook")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserBookId");
+                        .HasForeignKey("IdUserBook")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("User");
 

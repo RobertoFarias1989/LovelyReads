@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using LovelyReads.Application.User.Commands.CreateUser;
+using System.Text.RegularExpressions;
 
 namespace LovelyReads.Application.User.Validators
 {
@@ -14,6 +15,25 @@ namespace LovelyReads.Application.User.Validators
                 .WithMessage("FullName's field mustn't be null.")
             .MaximumLength(150)
                 .WithMessage("FullName's maximum length is around 150 characters.");
+
+            RuleFor(u => u.PasswordValue)
+                .NotEmpty()
+                    .WithMessage("PasswordValue's field mustn't be empty.")
+                .NotNull()
+                    .WithMessage("PasswordValue's field mustn't be null.")
+                .MaximumLength(100)
+                    .WithMessage("PasswordValue's maximum length is around 100 characters.")
+                .Must(ValidPassword)
+                     .WithMessage("Password must contain at least 8 characters, a number," +
+               "one uppercase letter, one lowercase letter and one special character.");
+
+            RuleFor(u => u.Role)
+                .NotEmpty()
+                    .WithMessage("Role's field mustn't be empty.")
+                .NotNull()
+                    .WithMessage("Role's field mustn't be null.")
+                .MaximumLength(100)
+                    .WithMessage("Role's maximum length is around 100 characters.");
 
             RuleFor(u => u.CPFNumber)
            .NotEmpty()
@@ -112,6 +132,13 @@ namespace LovelyReads.Application.User.Validators
                 resto = 11 - resto;
             digito = digito + resto.ToString();
             return cpf.EndsWith(digito);
+        }
+
+        public bool ValidPassword(string password)
+        {
+            var regex = new Regex(@"^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!*@#$%^&+=]).*$");
+
+            return regex.IsMatch(password);
         }
 
 

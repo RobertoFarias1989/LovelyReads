@@ -14,4 +14,5 @@ public class CreateUserCommand : IRequest<Result<int>>
     public string? EmailAddress { get; set; }
     public string? FullName { get; set; }
     public string? PasswordValue { get; set; }
+    public string? Role { get; set; }
 }

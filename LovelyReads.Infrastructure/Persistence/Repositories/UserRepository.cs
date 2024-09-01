@@ -36,6 +36,12 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories
                 .SingleOrDefaultAsync(u => u.Id == id);
         }
 
+        public async Task<User?> GetUserByEmailAndPasswordAsync(string email, string passwordHash)
+        {
+            return await _dbContext.Users
+                .SingleOrDefaultAsync(u => u.Email.EmailAddress == email && u.Password.PasswordValue == passwordHash);
+        }
+
         public async Task AddAsync(User user)
         {
             await _dbContext.Users.AddAsync(user);
