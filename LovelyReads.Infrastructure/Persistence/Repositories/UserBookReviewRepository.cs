@@ -1,5 +1,7 @@
 ﻿using LovelyReads.Core.Entities;
+using LovelyReads.Core.Models;
 using LovelyReads.Core.Repositories;
+using LovelyReads.Infrastructure.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
 
 namespace LovelyReads.Infrastructure.Persistence.Repositories;
@@ -7,18 +9,31 @@ namespace LovelyReads.Infrastructure.Persistence.Repositories;
 public class UserBookReviewRepository : IUserBookReviewRepository
 {
     private readonly LovelyReadsDbContext _dbContext;
+    private const int PAGE_SIZE = 2;
 
     public UserBookReviewRepository(LovelyReadsDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<List<UserBookReview>> GetAllAsync()
+    public async Task<PaginationResult<UserBookReview>> GetAllAsync(string query, int page)
     {
-        return await _dbContext
-            .UserBookReviews
-            .AsNoTracking()
-            .ToListAsync();
+
+        IQueryable<UserBookReview> userBookReviews = _dbContext.UserBookReviews;
+
+        if (!string.IsNullOrEmpty(query))
+        {
+            userBookReviews = userBookReviews
+                .Where(b =>
+                b.User!.Name.FullName.Contains(query));
+        }
+
+        return await userBookReviews.GetPaged<UserBookReview>(page, PAGE_SIZE);
+
+        //return await _dbContext
+        //    .UserBookReviews
+        //    .AsNoTracking()
+        //    .ToListAsync();
     }
 
     public async Task<UserBookReview?> GetByIdAsync(int id)
