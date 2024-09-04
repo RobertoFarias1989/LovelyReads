@@ -6,7 +6,7 @@ public class UserViewModel
         string street,
         string city,
         string state,
-        string postalCode, string country, string cPFNumber, string emailAddress, string fullName, string passwordValue)
+        string postalCode, string country, string cPFNumber, string emailAddress, string fullName, string passwordValue, string role)
     {
         Id = id;
         Street = street;
@@ -18,6 +18,7 @@ public class UserViewModel
         EmailAddress = emailAddress;
         FullName = fullName;
         PasswordValue = passwordValue;
+        Role = role;
     }
 
     public int Id { get; private set; }
@@ -30,4 +31,5 @@ public class UserViewModel
     public string EmailAddress { get; private set; }
     public string FullName { get; private set; }
     public string PasswordValue { get; private set; }
+    public string Role { get; private set; }
 }

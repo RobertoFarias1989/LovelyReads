@@ -14,6 +14,7 @@ public class UserDetailsViewModel
         string emailAddress,
         string fullName,
         string passwordValue,
+        string role,
         bool isDeleted, DateTime createdAt, DateTime? updatedAt, List<UserBookReviewViewModel> bookReviews)
     {
         Street = street;
@@ -25,6 +26,7 @@ public class UserDetailsViewModel
         EmailAddress = emailAddress;
         FullName = fullName;
         PasswordValue = passwordValue;
+        Role = role;
         IsDeleted = isDeleted;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
@@ -40,6 +42,7 @@ public class UserDetailsViewModel
     public string EmailAddress { get; private set; }
     public string FullName { get; private set; }
     public string PasswordValue { get; private set; }
+    public string Role { get; private set; }
     public bool IsDeleted { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
