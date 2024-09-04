@@ -1,10 +1,11 @@
 ﻿using LovelyReads.Application.Book.ViewModels;
+using LovelyReads.Core.Models;
 using LovelyReads.Core.Repositories;
 using MediatR;
 
 namespace LovelyReads.Application.Book.Queries.GetAllBooks
 {
-    public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, List<BookViewModel>>
+    public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, PaginationResult<BookViewModel>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -13,11 +14,12 @@ namespace LovelyReads.Application.Book.Queries.GetAllBooks
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<BookViewModel>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
+        public async Task<PaginationResult<BookViewModel>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
-            var books = await _unitOfWork.BookRepository.GetAllAsync();
+            var paginationBooks = await _unitOfWork.BookRepository.GetAllAsync(request.Query, request.Page);
 
-            var booksViewModel = books
+            var booksViewModel = paginationBooks
+                .Data
                 .Where(entity => entity.IsDeleted == false)
                 .Select(b => new BookViewModel(
                     b.Id,
@@ -27,7 +29,14 @@ namespace LovelyReads.Application.Book.Queries.GetAllBooks
                     b.BookCover))
                 .ToList();
 
-            return booksViewModel;
+            var paginationBooksViewModel = new PaginationResult<BookViewModel>(
+                paginationBooks.Page,
+                paginationBooks.TotalPages,
+                paginationBooks.PageSize,
+                paginationBooks.ItemsCount,
+                booksViewModel);
+
+            return paginationBooksViewModel;
         }
     }
 }

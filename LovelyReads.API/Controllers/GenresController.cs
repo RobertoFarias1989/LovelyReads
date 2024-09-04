@@ -28,9 +28,9 @@ namespace LovelyReads.API.Controllers
         [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Obtém a lista de Genres")]
         [ProducesResponseType(typeof(List<GenreViewModel>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string? query, int page = 1)
         {
-            var getAllGenreQuery = new GetAllGenresQuery();
+            var getAllGenreQuery = new GetAllGenresQuery(query!, page);
 
             var genres = await _mediator.Send(getAllGenreQuery);
 

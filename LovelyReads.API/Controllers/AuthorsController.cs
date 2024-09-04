@@ -27,9 +27,9 @@ namespace LovelyReads.API.Controllers
         [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Obtém a lista de Authors")]
         [ProducesResponseType(typeof(List<AuthorViewModel>),StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string? query, int page = 1)
         {
-            var getAllAuthorsQuery = new GetAllAuthorsQuery();
+            var getAllAuthorsQuery = new GetAllAuthorsQuery(query!, page);
 
             var authors = await _mediator.Send(getAllAuthorsQuery);
 

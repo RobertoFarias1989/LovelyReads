@@ -28,9 +28,9 @@ namespace LovelyReads.API.Controllers
         [Authorize(Roles = "manager, reader")]
         [SwaggerOperation(Summary = "Obtém a lista de Books")]
         [ProducesResponseType(typeof(List<BookViewModel>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string? query, int page = 1)
         {
-            var getAllBooksQuery = new GetAllBooksQuery();
+            var getAllBooksQuery = new GetAllBooksQuery(query!, page);
 
             var books = await _mediator.Send(getAllBooksQuery);
 
