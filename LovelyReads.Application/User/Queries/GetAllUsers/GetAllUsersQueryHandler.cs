@@ -1,10 +1,11 @@
 ﻿using LovelyReads.Application.User.ViewModels;
+using LovelyReads.Core.Models;
 using LovelyReads.Core.Repositories;
 using MediatR;
 
 namespace LovelyReads.Application.User.Queries.GetAllUsers;
 
-public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<UserViewModel>>
+public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, PaginationResult<UserViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -13,11 +14,12 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<Us
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<UserViewModel>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+    public async Task<PaginationResult<UserViewModel>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        var users = await _unitOfWork!.UserRepository.GetAllAsync();
+        var paginationUsers = await _unitOfWork!.UserRepository.GetAllAsync(request.Query, request.Page);
 
-        var userViewModel = users
+        var userViewModel = paginationUsers
+            .Data
             .Where(entity => entity.IsDeleted == false)
             .Select(u => new UserViewModel(
                 u.Id,
@@ -29,9 +31,17 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<Us
                 u.CPF.CPFNumber,
                 u.Email.EmailAddress,
                 u.Name.FullName,
-                u.Password.PasswordValue))
+                u.Password.PasswordValue,
+                u.Role))
             .ToList();
 
-        return userViewModel;
+        var paginationUsersViewModel = new PaginationResult<UserViewModel>(
+            paginationUsers.Page,
+            paginationUsers.TotalPages,
+            paginationUsers.PageSize,
+            paginationUsers.ItemsCount,
+            userViewModel);
+
+        return paginationUsersViewModel;
     }
 }

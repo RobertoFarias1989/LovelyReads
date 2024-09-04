@@ -1,11 +1,12 @@
 ﻿using LovelyReads.Application.Genre.ViewModels;
 using LovelyReads.Core.Entities;
+using LovelyReads.Core.Models;
 using LovelyReads.Core.Repositories;
 using MediatR;
 
 namespace LovelyReads.Application.Genre.Queries.GetAllGenre;
 
-public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, List<GenreViewModel>>
+public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, PaginationResult<GenreViewModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,11 +15,12 @@ public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, List<
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<GenreViewModel>> Handle(GetAllGenresQuery request, CancellationToken cancellationToken)
+    public async Task<PaginationResult<GenreViewModel>> Handle(GetAllGenresQuery request, CancellationToken cancellationToken)
     {
-        var genre = await _unitOfWork.GenreRepository.GetAllAsync();
+        var paginationGenre = await _unitOfWork.GenreRepository.GetAllAsync(request.Query, request.Page);
 
-        var genreViewModel = genre
+        var genreViewModel = paginationGenre
+            .Data
             .Where(entity => entity.IsDeleted == false)
             .Select(g => new GenreViewModel(
                 g.Id,
@@ -28,6 +30,13 @@ public class GetAllGenresQueryHandler : IRequestHandler<GetAllGenresQuery, List<
                 g.UpdatedAt))
             .ToList();
 
-        return genreViewModel;
+        var paginationGenreViewModel = new PaginationResult<GenreViewModel>(
+            paginationGenre.Page,
+            paginationGenre.TotalPages,
+            paginationGenre.PageSize,
+            paginationGenre.ItemsCount,
+            genreViewModel);
+
+        return paginationGenreViewModel;
     }
 }

@@ -28,9 +28,9 @@ namespace LovelyReads.API.Controllers
         [HttpGet]
         [SwaggerOperation(Summary = "Obtém a lista de Users")]
         [ProducesResponseType(typeof(List<UserViewModel>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string? query, int page = 1)
         {
-            var getAllUsersQuery = new GetAllUsersQuery();
+            var getAllUsersQuery = new GetAllUsersQuery(query!, page);
 
             var users = await _mediator.Send(getAllUsersQuery);
 
@@ -92,7 +92,7 @@ namespace LovelyReads.API.Controllers
             if (!result.Success)
                 return NotFound(result.Errors);
 
-            return Ok(result);
+            return Ok(result.Value);
         }
 
         [HttpDelete("{id}")]
