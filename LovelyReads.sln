@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovelyReads.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovelyReads.API", "LovelyReads.API\LovelyReads.API.csproj", "{AC1A3179-6FAF-4A7A-86E7-9B68EDD73510}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovelyReads.UnitTests", "LovelyReads.UnitTests\LovelyReads.UnitTests.csproj", "{0387CBE4-9275-40E1-930D-BB7F20868419}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{AC1A3179-6FAF-4A7A-86E7-9B68EDD73510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC1A3179-6FAF-4A7A-86E7-9B68EDD73510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC1A3179-6FAF-4A7A-86E7-9B68EDD73510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0387CBE4-9275-40E1-930D-BB7F20868419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0387CBE4-9275-40E1-930D-BB7F20868419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0387CBE4-9275-40E1-930D-BB7F20868419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0387CBE4-9275-40E1-930D-BB7F20868419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
