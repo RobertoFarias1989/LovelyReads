@@ -32,7 +32,10 @@ public class CreateAuthorCommandHandlerTests
         var id = await createAuthorCommandHandler.Handle(createAuthorCommand, new CancellationToken());
 
         // Assert 
-        Assert.True(id.Value > 0);
+
+        //A verificação abaixo foi comentada, pois não faz sentido dentro do contexto de testes unitários
+        //já que não queremos verificar se a entidade foi persisitida no banco de dados - o que faria mais sentido dentro dos testes de integração
+        //Assert.True(id.Value >= 0);
 
         await authorUnitOfWork.Received(1).AuthorRepository.AddAsync(Arg.Any<LovelyReads.Core.Entities.Author>());
 
