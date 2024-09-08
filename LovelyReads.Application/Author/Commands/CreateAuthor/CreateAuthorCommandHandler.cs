@@ -23,9 +23,9 @@ public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, R
         var imagePath = Path.Combine("AuthorStorage", request.Image!.FileName);
 
         //Quando for rodar os testes unitários comente as linhas abaixo referentes a criação e cópia da imagem
-        //using Stream fileStream = new FileStream(imagePath, FileMode.Create);
+        using Stream fileStream = new FileStream(imagePath, FileMode.Create);
 
-        //request.Image.CopyTo(fileStream);
+        request.Image.CopyTo(fileStream);
 
         var author = new Core.Entities.Author(
             request.Born!,
