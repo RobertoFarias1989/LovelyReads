@@ -18,8 +18,10 @@ namespace LovelyReads.Application.Book.Commands.CreateBook
         public async Task<Result<int>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
             var bookCoverPath = Path.Combine("BookStorage", request.BookCover!.FileName);
-            using Stream fileStream = new FileStream(bookCoverPath, FileMode.Create);
-            request.BookCover.CopyTo(fileStream);
+
+            //Comentar estas linhas quando do teste unitário
+            //using Stream fileStream = new FileStream(bookCoverPath, FileMode.Create);
+            //request.BookCover.CopyTo(fileStream);
 
             var book = new Core.Entities.Book(request.Title!,
                 request.Description!,

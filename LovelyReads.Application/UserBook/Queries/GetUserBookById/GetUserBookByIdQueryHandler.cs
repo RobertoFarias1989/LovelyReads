@@ -19,6 +19,7 @@ public class GetUserBookByIdQueryHandler : IRequestHandler<GetUserBookByIdQuery,
     public async Task<Result<UserBookDetailsViewModel>> Handle(GetUserBookByIdQuery request, CancellationToken cancellationToken)
     {
         var userBook = await _unitOfWork.UserBookRepository.GetDetailsByIdAsync(request.Id);
+
         UserBookDetailsViewModel userBookDetailsViewModel;
 
         if (userBook == null)
